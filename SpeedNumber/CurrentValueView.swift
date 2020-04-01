@@ -10,9 +10,10 @@ import SwiftUI
 
 struct CurrentValueView: View {
     var currentValue: Int
+
     var body: some View {
         Text(currentValue.description)
-            .font(Font.system(size: 56, weight: .semibold, design: .monospaced))
+            .font(Font.system(size: 56, design: .monospaced))
             .foregroundColor(Color.primary)
     }
 }
@@ -21,4 +22,13 @@ struct CurrentValueView_Previews: PreviewProvider {
     static var previews: some View {
         CurrentValueView(currentValue: 4)
     }
+}
+
+extension AnyTransition {
+  static var customTransition: AnyTransition {
+    let transition = AnyTransition.move(edge: .top)
+      .combined(with: .scale(scale: 0.2, anchor: .topTrailing))
+      .combined(with: .opacity)
+    return transition
+  }
 }

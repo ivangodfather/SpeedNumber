@@ -14,8 +14,14 @@ struct TileView: View {
     
     var body: some View {
         Button(action: { self.completion() }) {
-            Text(value > 0 ? value.description : "")
-                .bold()
+            Rectangle()
+                .fill(Color(UIColor.systemBackground))
+                .border(Color.primary, width: value == 0 ? 0: 2)
+                .overlay(
+                    Text(value > 0 ? value.description : "")
+                        .foregroundColor(.primary)
+                        .font(Font.system(size: 23, weight: .medium, design: .monospaced))
+            )
         }
     }
 }
