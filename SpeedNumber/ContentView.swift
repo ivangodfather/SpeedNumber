@@ -42,13 +42,20 @@ struct ContentView: View {
             }
             Group {
                 if gridContent.isEmpty {
-                    Spacer()
                     VStack {
+                        Spacer()
                         Text("Tap to start")
                         .font(Font.system(.largeTitle, design: .monospaced))
                             .padding(.bottom, 32)
                         Text("Try to follow de sequence as fast as you can!")
                         .font(Font.system(.headline, design: .monospaced))
+                        Spacer()
+                        Button(action: { GameCenter.shared.showLeaderBoard() }) {
+                            HStack {
+                                Image(systemName: "gamecontroller")
+                                Text("Leaderboard")
+                            }
+                        }.foregroundColor(.primary)
                     }
                     .padding(32)
                     .onTapGesture {
@@ -59,17 +66,33 @@ struct ContentView: View {
                     createGrid()
                     .padding([Edge.Set.leading, .trailing], 15)
                     Spacer()
-                    Button(action: { self.newGame() }) {
-                        Text("Restart")
-                            .foregroundColor(.primary)
+
+                    HStack {
+                        Button(action: { self.newGame() }) {
+                             HStack {
+                                 Image(systemName: "play")
+                                 Text("Restart")
+                             }
+                        }
+                        Spacer()
+                        Button(action: { GameCenter.shared.showLeaderBoard() }) {
+                            HStack {
+                                Image(systemName: "gamecontroller")
+                                Text("Leaderboard")
+                            }
+                        }
+
                     }
+                .padding(16)
+                    .foregroundColor(.primary)
+
+
                 }
                 
             }
             Spacer()
         }
         .font(Font.system(.headline, design: .monospaced))
-
         
     }
     
@@ -115,6 +138,7 @@ struct ContentView: View {
             if currentValue > maxNumber {
                 self.gameState = .finished
                 print("win! with time \(gameDuration)")
+                GameCenter.shared.reportScore(gameDuration)
             }
         }
         
