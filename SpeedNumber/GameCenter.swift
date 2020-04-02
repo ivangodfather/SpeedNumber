@@ -14,13 +14,16 @@ import GameKit
 final class GameCenter: NSObject, GKLocalPlayerListener {
     
     static let shared = GameCenter()
-    
-    static var isAuthenticated: Bool {
-        return GKLocalPlayer.local.isAuthenticated
-    }
-    
     var viewController: UIViewController?
     
+    
+    private var leaderboardIdentifier = "speedynumbers"
+    private static var isAuthenticated: Bool {
+        return GKLocalPlayer.local.isAuthenticated
+    }
+    private let leaderboard = GKLeaderboard()
+
+
     override init() {
         super.init()
         
@@ -34,10 +37,13 @@ final class GameCenter: NSObject, GKLocalPlayerListener {
                 print("Error authentication to GameCenter: \(error?.localizedDescription ?? "none")")
             }
         }
+        leaderboard.identifier = leaderboardIdentifier
+        leaderboard.loadScores { _, _ in
+        }
     }
     
     func reportScore(_ score: Double) {
-        let gkScore = GKScore(leaderboardIdentifier: "speedynumbers")
+        let gkScore = GKScore(leaderboardIdentifier: leaderboardIdentifier)
         gkScore.value = Int64(score * 100)
         gkScore.context = 0
         GKScore.report([gkScore]) { error in
@@ -51,6 +57,10 @@ final class GameCenter: NSObject, GKLocalPlayerListener {
         viewController?.present(gc, animated: true, completion: {
             
         })
+    }
+    
+    func loadBestResult() -> Int64? {
+        leaderboard.localPlayerScore?.value
     }
         
 }

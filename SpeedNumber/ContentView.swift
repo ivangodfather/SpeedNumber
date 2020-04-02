@@ -15,20 +15,21 @@ enum GameState {
 }
 
 struct ContentView: View {
-    private var gridSize = 2
+    private var gridSize = 4
     
     @State private var gridContent: [[Int]] = []
     @State private var currentValue = 1
     @State private var gameState = GameState.idle
     @State private var gameDuration: TimeInterval = 0.0
-    private var targetValue: Int { gridSize * gridSize }
+    private var targetValue: Int { gridSize * gridSize * 2 }
 
     
     var body: some View {
         Group {
             if gameState == .finished {
                 ScoreView(
-                    score: gameDuration.value,
+                    score: gameDuration.score,
+                    maxScore: GameCenter.shared.loadBestResult()?.score,
                     completion: updateState
                 )
             }
@@ -80,14 +81,16 @@ struct ContentView: View {
             withAnimation {
                 currentValue += 1
             }
-            gridContent[x][y] = nextSlot <= gridSize * 2 ? nextSlot : 0
-            if currentValue > gridSize * 2 {
-                self.gameState = .finished
-                print("win! with time \(gameDuration)")
-                GameCenter.shared.reportScore(gameDuration)
-            }
+            gridContent[x][y] = nextSlot <= targetValue ? nextSlot : 0
+            checkGameIsEnded()
         }
-        
+    }
+    
+    private func checkGameIsEnded() {
+        if currentValue > targetValue {
+            self.gameState = .finished
+            GameCenter.shared.reportScore(gameDuration)
+        }
     }
     
 }

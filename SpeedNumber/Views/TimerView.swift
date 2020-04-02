@@ -16,7 +16,7 @@ struct TimerView: View {
     
     var body: some View {
         VStack {
-            Text(gameDuration.value.description)
+            Text(gameDuration.score)
                 .font(Font.system(.largeTitle, design: .monospaced))
                 .foregroundColor(Color.primary)
         }
@@ -29,11 +29,5 @@ struct TimerView: View {
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
         TimerView(gameDuration: .constant(3.3))
-    }
-}
-
-extension TimeInterval {
-    var value: String {
-        String(format: "%.2f", self)
     }
 }
