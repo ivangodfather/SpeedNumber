@@ -12,6 +12,7 @@ import SwiftUI
 struct MenuView: View {
     
     let newGame, leaderboard: () -> ()
+    @EnvironmentObject var gameCenter: GameCenter
     
     var body: some View {
         HStack {
@@ -22,7 +23,7 @@ struct MenuView: View {
                 }
             }
             Spacer()
-            Button(action: { GameCenter.shared.showLeaderBoard() }) {
+            Button(action: { self.gameCenter.showLeaderBoard() }) {
                 HStack {
                     Image(systemName: "gamecontroller")
                     Text("Leaderboard")

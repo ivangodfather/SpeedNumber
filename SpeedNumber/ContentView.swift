@@ -15,13 +15,14 @@ enum GameState {
 }
 
 struct ContentView: View {
-    private var gridSize = 4
+    private var gridSize = 2
     
     @State private var gridContent: [[Int]] = []
     @State private var currentValue = 1
     @State private var gameState = GameState.idle
     @State private var gameDuration: TimeInterval = 0.0
     private var targetValue: Int { gridSize * gridSize * 2 }
+    @EnvironmentObject var gameCenter: GameCenter
 
     
     var body: some View {
@@ -29,7 +30,7 @@ struct ContentView: View {
             if gameState == .finished {
                 ScoreView(
                     score: gameDuration.score,
-                    maxScore: GameCenter.shared.loadBestResult()?.score,
+                    maxScore: self.gameCenter.loadBestResult()?.score,
                     completion: updateState
                 )
             }
@@ -44,7 +45,7 @@ struct ContentView: View {
             } else {
                 WelcomeScreenView(
                     newGame: updateState,
-                    leaderboard: GameCenter.shared.showLeaderBoard
+                    leaderboard: self.gameCenter.showLeaderBoard
                 )
             }
         }
@@ -88,8 +89,8 @@ struct ContentView: View {
     
     private func checkGameIsEnded() {
         if currentValue > targetValue {
-            self.gameState = .finished
-            GameCenter.shared.reportScore(gameDuration)
+            updateState()
+            self.gameCenter.reportScore(gameDuration)
         }
     }
     
@@ -98,5 +99,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(GameCenter(leaderboardIdentifier: "random"))
     }
 }

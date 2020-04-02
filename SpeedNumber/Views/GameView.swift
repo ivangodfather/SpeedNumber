@@ -15,7 +15,8 @@ struct GameView: View {
     var currentValue: Int
     var gridContent: [[Int]]
     var didTap: (_ x: Int, _ y: Int) -> ()
-    
+    @EnvironmentObject var gameCenter: GameCenter
+
     var body: some View {
         VStack {
             GameStatusView(
@@ -28,7 +29,7 @@ struct GameView: View {
             
             MenuView(
                 newGame: completion,
-                leaderboard:GameCenter.shared.showLeaderBoard
+                leaderboard: self.gameCenter.showLeaderBoard
             )
         }
     }
