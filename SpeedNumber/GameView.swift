@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GameView: View {
     
-    var newGame: () -> ()
+    var completion: () -> ()
     @Binding var gameDuration: TimeInterval
     var currentValue: Int
     var gridContent: [[Int]]
@@ -27,7 +27,7 @@ struct GameView: View {
             Spacer()
             
             MenuView(
-                newGame: self.newGame,
+                newGame: completion,
                 leaderboard:GameCenter.shared.showLeaderBoard
             )
         }
@@ -54,6 +54,11 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(newGame: { }, gameDuration: .constant(3), currentValue: 1, gridContent: [[]], didTap: { _, _ in })
+        GameView(completion: { },
+                 gameDuration: .constant(3),
+                 currentValue: 1,
+                 gridContent: [[1, 2, 3], [1, 2, 3], [1, 2, 3]],
+                 didTap: { _, _ in }
+        )
     }
 }

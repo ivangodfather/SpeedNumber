@@ -12,26 +12,28 @@ import SwiftUI
 struct WelcomeScreenView: View {
     
     let newGame: () -> ()
+    let leaderboard: () -> ()
     
     var body: some View {
         VStack {
             Spacer()
             Text("Tap to start")
-            .font(Font.system(.largeTitle, design: .monospaced))
-                .padding(.bottom, 32)
+                .font(Font.system(.largeTitle, design: .monospaced))
+                .padding(32)
             Text("Try to follow de sequence as fast as you can!")
-            .font(Font.system(.headline, design: .monospaced))
+                .padding(32)
+                .font(Font.system(.headline, design: .monospaced))
             Spacer()
-            Button(action: { GameCenter.shared.showLeaderBoard() }) {
-                HStack {
-                    Image(systemName: "gamecontroller")
-                    Text("Leaderboard")
-                }
-            }.foregroundColor(.primary)
+            MenuView(newGame: newGame, leaderboard: leaderboard)
         }
-        .padding(32)
         .onTapGesture {
             self.newGame()
         }
+    }
+}
+
+struct WelcomeScreenView_Previews: PreviewProvider {
+    static var previews: some View {
+        WelcomeScreenView(newGame: {}, leaderboard: {})
     }
 }

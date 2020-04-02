@@ -15,45 +15,55 @@ enum GameState {
 }
 
 struct ContentView: View {
-    @State private var gridSize = 5
+    private var gridSize = 2
+    
     @State private var gridContent: [[Int]] = []
     @State private var currentValue = 1
-    
     @State private var gameState = GameState.idle
     @State private var gameDuration: TimeInterval = 0.0
-    @State private var isActive = true
-    
+    private var targetValue: Int { gridSize * gridSize }
 
     
     var body: some View {
         Group {
             if gameState == .finished {
-                ScoreView(score: gameDuration.value) {
-                    self.newGame()
-                }
+                ScoreView(
+                    score: gameDuration.value,
+                    completion: updateState
+                )
             }
             else if gameState == .running {
                 GameView(
-                    newGame: newGame,
+                    completion: updateState,
                     gameDuration: $gameDuration,
                     currentValue: currentValue,
                     gridContent: gridContent,
                     didTap: didTap
                 )
             } else {
-                WelcomeScreenView(newGame: self.newGame)
+                WelcomeScreenView(
+                    newGame: updateState,
+                    leaderboard: GameCenter.shared.showLeaderBoard
+                )
             }
         }
     }
     
-    private func newGame() {
-        if gameState == .finished {
+    private func updateState() {
+        switch gameState {
+        case .idle:
+            resetGame()
+            gameState = .running
+        case .running:
+            gameState = currentValue < targetValue ? .idle : .finished
+        case .finished:
             gameState = .idle
-            return
         }
+    }
+    
+    private func resetGame() {
         gameDuration = 0
         currentValue = 1
-        gameState = .running
         var content = Array(repeating: Array(repeating: 0, count: gridSize), count: gridSize)
         var contents = Array(1...gridSize * gridSize).shuffled()
         for x in 0...gridSize - 1 {
@@ -62,24 +72,6 @@ struct ContentView: View {
             }
         }
         gridContent = content
-    }
-    
-    private func createGrid() -> some View {
-        GeometryReader { proxy in
-            VStack(spacing: 5) {
-                ForEach(0...self.gridContent.count - 1, id: \.self) { y in
-                    HStack(spacing: 5) {
-                        ForEach(0...self.gridContent.first!.count - 1, id: \.self) { x in
-                            TileView(x: x, y: y, value: self.gridContent[x][y]) {
-                                self.didTap(x, y)
-                            }
-                            .frame(width: proxy.size.width / CGFloat(self.gridSize),
-                                   height: proxy.size.width / CGFloat(self.gridSize))
-                        }
-                    }
-                }
-            }
-        }
     }
     
     private func didTap(_ x: Int, _ y: Int) {

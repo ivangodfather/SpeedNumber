@@ -18,7 +18,7 @@ struct MenuView: View {
             Button(action: { self.newGame() }) {
                 HStack {
                     Image(systemName: "play")
-                    Text("Restart")
+                    Text("Play")
                 }
             }
             Spacer()
@@ -30,7 +30,7 @@ struct MenuView: View {
             }
             
         }
-        .padding(16)
+        .padding([.bottom, .leading, .trailing], 32)
         .foregroundColor(.primary)
     }
 }
