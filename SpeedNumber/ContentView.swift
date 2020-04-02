@@ -15,88 +15,42 @@ enum GameState {
 }
 
 struct ContentView: View {
-    private let maxNumber = 50
     @State private var gridSize = 5
     @State private var gridContent: [[Int]] = []
     @State private var currentValue = 1
     
     @State private var gameState = GameState.idle
-    @State private var gameDuration: TimeInterval = 0
+    @State private var gameDuration: TimeInterval = 0.0
     @State private var isActive = true
     
+
+    
     var body: some View {
-        VStack {
-            Group {
-                if gameState != .idle {
-                    VStack {
-                        HStack {
-                            Image(systemName: "timer")
-                            TimerView($gameDuration, isActive: gameState == .running)
-                        }
-                        HStack {
-                            Image(systemName: "number")
-                            CurrentValueView(currentValue: currentValue)
-                        }
-                    }.padding(.top, 64)
+        Group {
+            if gameState == .finished {
+                ScoreView(score: gameDuration.value) {
+                    self.newGame()
                 }
             }
-            Group {
-                if gridContent.isEmpty {
-                    VStack {
-                        Spacer()
-                        Text("Tap to start")
-                        .font(Font.system(.largeTitle, design: .monospaced))
-                            .padding(.bottom, 32)
-                        Text("Try to follow de sequence as fast as you can!")
-                        .font(Font.system(.headline, design: .monospaced))
-                        Spacer()
-                        Button(action: { GameCenter.shared.showLeaderBoard() }) {
-                            HStack {
-                                Image(systemName: "gamecontroller")
-                                Text("Leaderboard")
-                            }
-                        }.foregroundColor(.primary)
-                    }
-                    .padding(32)
-                    .onTapGesture {
-                        self.newGame()
-                    }
-
-                } else {
-                    createGrid()
-                    .padding([Edge.Set.leading, .trailing], 15)
-                    Spacer()
-
-                    HStack {
-                        Button(action: { self.newGame() }) {
-                             HStack {
-                                 Image(systemName: "play")
-                                 Text("Restart")
-                             }
-                        }
-                        Spacer()
-                        Button(action: { GameCenter.shared.showLeaderBoard() }) {
-                            HStack {
-                                Image(systemName: "gamecontroller")
-                                Text("Leaderboard")
-                            }
-                        }
-
-                    }
-                .padding(16)
-                    .foregroundColor(.primary)
-
-
-                }
-                
+            else if gameState == .running {
+                GameView(
+                    newGame: newGame,
+                    gameDuration: $gameDuration,
+                    currentValue: currentValue,
+                    gridContent: gridContent,
+                    didTap: didTap
+                )
+            } else {
+                WelcomeScreenView(newGame: self.newGame)
             }
-            Spacer()
         }
-        .font(Font.system(.headline, design: .monospaced))
-        
     }
     
     private func newGame() {
+        if gameState == .finished {
+            gameState = .idle
+            return
+        }
         gameDuration = 0
         currentValue = 1
         gameState = .running
@@ -120,7 +74,7 @@ struct ContentView: View {
                                 self.didTap(x, y)
                             }
                             .frame(width: proxy.size.width / CGFloat(self.gridSize),
-                            height: proxy.size.width / CGFloat(self.gridSize))
+                                   height: proxy.size.width / CGFloat(self.gridSize))
                         }
                     }
                 }
@@ -134,8 +88,8 @@ struct ContentView: View {
             withAnimation {
                 currentValue += 1
             }
-            gridContent[x][y] = nextSlot <= maxNumber ? nextSlot : 0
-            if currentValue > maxNumber {
+            gridContent[x][y] = nextSlot <= gridSize * 2 ? nextSlot : 0
+            if currentValue > gridSize * 2 {
                 self.gameState = .finished
                 print("win! with time \(gameDuration)")
                 GameCenter.shared.reportScore(gameDuration)

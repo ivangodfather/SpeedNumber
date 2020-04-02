@@ -10,40 +10,30 @@ import SwiftUI
 import Combine
 
 struct TimerView: View {
-    private let timer  = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
-    private var gameDuration: Binding<TimeInterval>
-    private let isActive: Bool
     
-    init(_ gameDuration: Binding<TimeInterval>, isActive: Bool) {
-        self.gameDuration = gameDuration
-        self.isActive = isActive
-    }
+    @Binding var gameDuration: TimeInterval
+    private let timer  = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack {
-            Text(gameDuration.wrappedValue.value)
+            Text(gameDuration.value.description)
                 .font(Font.system(.largeTitle, design: .monospaced))
                 .foregroundColor(Color.primary)
         }
         .onReceive(timer) { output in
-            if self.isActive {
-                self.gameDuration.wrappedValue += 0.1
-            } else {
-                self.timer.upstream.connect().cancel()
-            }
-            
+            self.gameDuration += 0.01
         }
     }
 }
 
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
-        TimerView(.constant(0), isActive: true)
+        TimerView(gameDuration: .constant(3.3))
     }
 }
 
 extension TimeInterval {
     var value: String {
-        String(format: "%.1f", self)
+        String(format: "%.2f", self)
     }
 }
