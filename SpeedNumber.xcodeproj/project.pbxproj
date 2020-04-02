@@ -93,7 +93,6 @@
 				42F982082435D9F200E643E6 /* App */,
 				42F982072435D9E000E643E6 /* Views */,
 				42F982022435D52500E643E6 /* Extension */,
-				42A1E5772434932D00FA53F6 /* ContentView.swift */,
 				42E71C4F24350E3C007DEB2B /* GameCenter.swift */,
 				42A1E5792434932F00FA53F6 /* Assets.xcassets */,
 				42A1E57E2434932F00FA53F6 /* LaunchScreen.storyboard */,
@@ -123,6 +122,7 @@
 		42F982072435D9E000E643E6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42A1E5772434932D00FA53F6 /* ContentView.swift */,
 				42A1E58B2434C25E00FA53F6 /* CurrentValueView.swift */,
 				42A1E5872434BA5100FA53F6 /* TimerView.swift */,
 				42B6A7CB2435B65E00B4D381 /* WelcomeScreenView.swift */,
@@ -373,6 +373,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = ivan.SpeedNumber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -393,6 +394,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = ivan.SpeedNumber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -15,7 +15,7 @@ enum GameState {
 }
 
 struct ContentView: View {
-    private var gridSize = 2
+    private var gridSize = 5
     
     @State private var gridContent: [[Int]] = []
     @State private var currentValue = 1

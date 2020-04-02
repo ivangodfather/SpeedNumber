@@ -16,6 +16,8 @@ struct WelcomeScreenView: View {
     
     var body: some View {
         VStack {
+            Text("SpeedyNumbers v0.1 by Iván Ruiz")
+            .font(Font.system(.footnote, design: .monospaced))
             Spacer()
             Text("Tap to start")
                 .font(Font.system(.largeTitle, design: .monospaced))
@@ -25,6 +27,7 @@ struct WelcomeScreenView: View {
                 .font(Font.system(.headline, design: .monospaced))
             Spacer()
             MenuView(newGame: newGame, leaderboard: leaderboard)
+
         }
         .onTapGesture {
             self.newGame()

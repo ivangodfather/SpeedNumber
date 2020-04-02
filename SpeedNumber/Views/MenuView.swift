@@ -12,7 +12,6 @@ import SwiftUI
 struct MenuView: View {
     
     let newGame, leaderboard: () -> ()
-    @EnvironmentObject var gameCenter: GameCenter
     
     var body: some View {
         HStack {
@@ -23,7 +22,7 @@ struct MenuView: View {
                 }
             }
             Spacer()
-            Button(action: { self.gameCenter.showLeaderBoard() }) {
+            Button(action: { self.leaderboard() }) {
                 HStack {
                     Image(systemName: "gamecontroller")
                     Text("Leaderboard")
@@ -31,7 +30,14 @@ struct MenuView: View {
             }
             
         }
-        .padding([.bottom, .leading, .trailing], 32)
+        .padding(32)
         .foregroundColor(.primary)
+        .font(Font.system(.headline, design: .monospaced))
+    }
+}
+
+struct MenuView_Previews: PreviewProvider {
+    static var previews: some View {
+        MenuView(newGame: {}, leaderboard: {})
     }
 }

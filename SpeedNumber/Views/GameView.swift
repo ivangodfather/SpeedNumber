@@ -16,6 +16,7 @@ struct GameView: View {
     var gridContent: [[Int]]
     var didTap: (_ x: Int, _ y: Int) -> ()
     @EnvironmentObject var gameCenter: GameCenter
+    private let padding: CGFloat = 4
 
     var body: some View {
         VStack {
@@ -24,8 +25,6 @@ struct GameView: View {
                 currentValue: currentValue
             )
             createGrid()
-                .padding([Edge.Set.leading, .trailing], 15)
-            Spacer()
             
             MenuView(
                 newGame: completion,
@@ -36,19 +35,20 @@ struct GameView: View {
     
     private func createGrid() -> some View {
         GeometryReader { proxy in
-            VStack(spacing: 5) {
+            VStack(spacing: self.padding) {
                 ForEach(0...self.gridContent.count - 1, id: \.self) { y in
-                    HStack(spacing: 5) {
+                    HStack(spacing: self.padding) {
                         ForEach(0...self.gridContent.first!.count - 1, id: \.self) { x in
                             TileView(x: x, y: y, value: self.gridContent[x][y]) {
                                 self.didTap(x, y)
                             }
-                            .frame(width: proxy.size.width / CGFloat(self.gridContent.count),
-                                   height: proxy.size.width / CGFloat(self.gridContent.count))
                         }
                     }
                 }
             }
+            .padding( self.padding)
+            .frame(width: min(proxy.size.width, proxy.size.height),
+                   height: min(proxy.size.width, proxy.size.height))
         }
     }
 }
@@ -60,6 +60,6 @@ struct GameView_Previews: PreviewProvider {
                  currentValue: 1,
                  gridContent: [[1, 2, 3], [1, 2, 3], [1, 2, 3]],
                  didTap: { _, _ in }
-        )
+        ).environmentObject(GameCenter(leaderboardIdentifier: "x"))
     }
 }
