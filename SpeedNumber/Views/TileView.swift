@@ -15,19 +15,35 @@ struct TileView: View {
     var body: some View {
         Button(action: { self.completion() }) {
             Rectangle()
-                .fill(Color(UIColor.systemBackground))
+                .fill(Color(UIColor.systemFill).opacity(value > 25 ? 1 : 0.5))
                 .border(Color.primary, width: value == 0 ? 0: 2)
                 .overlay(
                     Text(value > 0 ? value.description : "")
                         .foregroundColor(.primary)
                         .font(Font.system(size: 23, weight: .medium, design: .monospaced))
             )
+            
         }
     }
 }
 
 struct TileView_Previews: PreviewProvider {
     static var previews: some View {
-        TileView(x: 1, y: 1, value: 1, completion: {})
+        VStack {
+            HStack {
+                TileView(x: 1, y: 1, value: 35, completion: {})
+                    .environment(\.colorScheme, .dark)
+                TileView(x: 1, y: 1, value: 2, completion: {})
+            }
+            .environment(\.colorScheme, .light)
+            HStack {
+                TileView(x: 1, y: 1, value: 35, completion: {})
+                    .environment(\.colorScheme, .dark)
+                TileView(x: 1, y: 1, value: 2, completion: {})
+            }
+            .environment(\.colorScheme, .dark)
+
+        }
+
     }
 }

@@ -27,7 +27,7 @@ final class GameCenter: NSObject, ObservableObject {
         self.leaderboardIdentifier = leaderboardIdentifier
         super.init()
         
-        //        showLogin()
+        showLogin()
         leaderboard.identifier = leaderboardIdentifier
         loadScores()
     }

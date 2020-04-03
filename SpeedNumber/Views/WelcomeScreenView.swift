@@ -11,12 +11,13 @@ import SwiftUI
 
 struct WelcomeScreenView: View {
     
+    let versionText: String
     let newGame: () -> ()
     let leaderboard: () -> ()
     
     var body: some View {
         VStack {
-            Text("SpeedyNumbers v0.1 by Iván Ruiz")
+            Text(versionText)
             .font(Font.system(.footnote, design: .monospaced))
             Spacer()
             Text("Tap to start")
@@ -37,6 +38,6 @@ struct WelcomeScreenView: View {
 
 struct WelcomeScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeScreenView(newGame: {}, leaderboard: {})
+        WelcomeScreenView(versionText: "Speedy v0.1", newGame: {}, leaderboard: {})
     }
 }

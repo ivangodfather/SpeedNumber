@@ -15,7 +15,13 @@ enum GameState {
 }
 
 struct ContentView: View {
-    private var gridSize = 2
+    private var gridSize : Int {
+        #if DEBUG
+            return 2
+        #else
+            return 5
+        #endif
+    }
     
     @State private var gridContent: [[Int]] = []
     @State private var currentValue = 1
@@ -45,11 +51,17 @@ struct ContentView: View {
                 )
             } else {
                 WelcomeScreenView(
+                    versionText: versionText(),
                     newGame: didTapNewGame,
                     leaderboard: self.gameCenter.showLeaderBoard
                 )
             }
         }
+    }
+    
+    private func versionText() -> String {
+
+        return "SpeedyNumbers v.\(Bundle.main.releaseVersion) build \(Bundle.main.buildVersion)\nCopyright © 2020 Iván Ruiz Monjo"
     }
     
     private func didTapNewGame() {
@@ -78,12 +90,22 @@ struct ContentView: View {
     }
     
     private func didTap(_ x: Int, _ y: Int) {
+        let isCorrectCell = currentValue == gridContent[x][y]
+
+
         let nextSlot = gridSize * gridSize + currentValue
-        if currentValue == gridContent[x][y] {
+        if isCorrectCell {
+            applyFeedback()
             currentValue += 1
             gridContent[x][y] = nextSlot <= targetValue ? nextSlot : 0
         }
         checkGameIsEnded()
+    }
+    
+    private func applyFeedback() {
+        let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+        notificationFeedbackGenerator.prepare()
+        notificationFeedbackGenerator.notificationOccurred(.success)
     }
     
     private func checkGameIsEnded() {

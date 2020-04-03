@@ -29,7 +29,10 @@ struct ScoreView: View {
                     .font(Font.system(size: 32, design: .monospaced))
                     .padding(.bottom, 32)
             }
-        }.onTapGesture {
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(UIColor.systemBackground))
+        .onTapGesture {
             self.completion()
         }
     }
@@ -37,6 +40,6 @@ struct ScoreView: View {
 
 struct ScoreView_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreView(score: "32.2", maxScore: "25.5", completion: {})
+        ScoreView(score: "32.2", maxScore: "20.0", completion: {})
     }
 }
