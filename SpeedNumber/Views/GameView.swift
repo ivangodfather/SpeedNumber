@@ -32,6 +32,7 @@ struct GameView: View {
                 leaderboard: self.gameCenter.showLeaderBoard
             )
         }
+        .background(Color(UIColor.systemBackground))
     }
     
     private func createGrid() -> some View {
@@ -66,6 +67,8 @@ struct GameView_Previews: PreviewProvider {
                                [1, 2, 3, 4, 5],
                                [1, 2, 3, 4, 5]],
                  didTap: { _, _ in }
-        ).environmentObject(GameCenter(leaderboardIdentifier: "x"))
+        )
+            .environmentObject(GameCenter(leaderboardIdentifier: "x"))
+            .colorScheme(.dark)
     }
 }

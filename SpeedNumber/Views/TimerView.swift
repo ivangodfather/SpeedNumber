@@ -23,6 +23,9 @@ struct TimerView: View {
         .onReceive(timer) { output in
             self.gameDuration += 0.01
         }
+        .onDisappear {
+            self.timer.upstream.connect().cancel()
+        }
     }
 }
 

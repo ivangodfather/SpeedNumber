@@ -17,7 +17,7 @@ enum GameState {
 struct ContentView: View {
     private var gridSize : Int {
         #if DEBUG
-            return 5
+            return 2
         #else
             return 5
         #endif
@@ -56,7 +56,7 @@ struct ContentView: View {
                     leaderboard: self.gameCenter.showLeaderBoard
                 )
             }
-        }
+        }.accentColor(Color.blue)
     }
     
     private func versionText() -> String {
@@ -110,8 +110,9 @@ struct ContentView: View {
     
     private func checkGameIsEnded() {
         if currentValue > targetValue {
-            gameState = currentValue < targetValue ? .idle : .finished
-            self.gameCenter.reportScore(gameDuration)
+            #if RELEASE
+                gameState = currentValue < targetValue ? .idle : .finished
+            #endif
         }
     }
     

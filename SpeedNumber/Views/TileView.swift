@@ -15,7 +15,7 @@ struct TileView: View {
     var body: some View {
         Button(action: { self.completion() }) {
             Rectangle()
-                .fill(Color(UIColor.systemFill).opacity(value > 25 ? 1 : 0.5))
+                .fill(Color.accentColor.opacity(value > 25 ? 0.8 : 0.2))
                 .border(Color.primary, width: value == 0 ? 0: 2)
                 .overlay(
                     Text(value > 0 ? value.description : "")
@@ -43,7 +43,7 @@ struct TileView_Previews: PreviewProvider {
             }
             .environment(\.colorScheme, .dark)
 
-        }
+        }.background(Color(UIColor.systemBackground))
 
     }
 }
