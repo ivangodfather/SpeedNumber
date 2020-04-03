@@ -15,13 +15,8 @@ enum GameState {
 }
 
 struct ContentView: View {
-    private var gridSize : Int {
-        #if DEBUG
-            return 2
-        #else
-            return 5
-        #endif
-    }
+    
+    @Environment(\.gridSize) var gridSize
     
     @State private var gridContent: [[Int]] = []
     @State private var currentValue = 1
@@ -110,11 +105,13 @@ struct ContentView: View {
     
     private func checkGameIsEnded() {
         if currentValue > targetValue {
+            gameState = currentValue < targetValue ? .idle : .finished
             #if RELEASE
-                gameState = currentValue < targetValue ? .idle : .finished
+            self.gameCenter.reportScore(gameDuration)
             #endif
         }
     }
+
     
 }
 

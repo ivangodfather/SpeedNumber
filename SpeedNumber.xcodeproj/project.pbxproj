@@ -18,6 +18,7 @@
 		42A1E5882434BA5100FA53F6 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A1E5872434BA5100FA53F6 /* TimerView.swift */; };
 		42A1E58A2434C1AB00FA53F6 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A1E5892434C1AB00FA53F6 /* TileView.swift */; };
 		42A1E58C2434C25E00FA53F6 /* CurrentValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A1E58B2434C25E00FA53F6 /* CurrentValueView.swift */; };
+		42AAF1172437AC9200BB21E7 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42AAF1162437AC9200BB21E7 /* View+.swift */; };
 		42B6A7CA2435B44C00B4D381 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B6A7C92435B44C00B4D381 /* ScoreView.swift */; };
 		42B6A7CC2435B65E00B4D381 /* WelcomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B6A7CB2435B65E00B4D381 /* WelcomeScreenView.swift */; };
 		42B6A7CE2435B73500B4D381 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B6A7CD2435B73500B4D381 /* MenuView.swift */; };
@@ -42,6 +43,7 @@
 		42A1E5872434BA5100FA53F6 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		42A1E5892434C1AB00FA53F6 /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		42A1E58B2434C25E00FA53F6 /* CurrentValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentValueView.swift; sourceTree = "<group>"; };
+		42AAF1162437AC9200BB21E7 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		42B6A7C92435B44C00B4D381 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		42B6A7CB2435B65E00B4D381 /* WelcomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenView.swift; sourceTree = "<group>"; };
 		42B6A7CD2435B73500B4D381 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				42F982032435D53100E643E6 /* Int+Score.swift */,
 				42F982052435D65600E643E6 /* TimeInterval+Score.swift */,
 				4272088C24371EBE0007D61A /* Bundle+Version.swift */,
+				42AAF1162437AC9200BB21E7 /* View+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				42B6A7CE2435B73500B4D381 /* MenuView.swift in Sources */,
 				42A1E58A2434C1AB00FA53F6 /* TileView.swift in Sources */,
 				42F982062435D65600E643E6 /* TimeInterval+Score.swift in Sources */,
+				42AAF1172437AC9200BB21E7 /* View+.swift in Sources */,
 				42B6A7CC2435B65E00B4D381 /* WelcomeScreenView.swift in Sources */,
 				42E71C5024350E3C007DEB2B /* GameCenter.swift in Sources */,
 				42A1E5782434932D00FA53F6 /* ContentView.swift in Sources */,
@@ -369,7 +373,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"SpeedNumber/Preview Content\"";
 				DEVELOPMENT_TEAM = CPTD3EV4H4;
 				ENABLE_PREVIEWS = YES;
@@ -378,7 +382,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 0.4;
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = ivan.SpeedNumber;
 				PRODUCT_NAME = SpeedyNumbers;
@@ -392,7 +396,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"SpeedNumber/Preview Content\"";
 				DEVELOPMENT_TEAM = CPTD3EV4H4;
 				ENABLE_PREVIEWS = YES;
@@ -401,7 +405,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 0.4;
 				OTHER_SWIFT_FLAGS = "-DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = ivan.SpeedNumber;
 				PRODUCT_NAME = SpeedyNumbers;

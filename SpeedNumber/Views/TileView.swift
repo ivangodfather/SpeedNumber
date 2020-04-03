@@ -11,11 +11,16 @@ import SwiftUI
 struct TileView: View {
     var x, y, value: Int
     var completion: () -> ()
+    @Environment(\.gridSize) var gridSize
+    
+    private var totalGridCount: Int {
+        return gridSize * gridSize
+    }
     
     var body: some View {
         Button(action: { self.completion() }) {
             Rectangle()
-                .fill(Color.accentColor.opacity(value > 25 ? 0.8 : 0.2))
+                .fill(Color.accentColor.opacity(value > totalGridCount ? 0.8 : 0.2))
                 .border(Color.primary, width: value == 0 ? 0: 2)
                 .overlay(
                     Text(value > 0 ? value.description : "")
