@@ -3,4 +3,86 @@
    uuid = "C1AA93C6-18B3-4982-9AF6-2594A5F0B1CC"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A5B305C0-BC77-44DB-B04A-BB39C5E522A5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpeedNumber/GameCenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "showLogin(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A5B305C0-BC77-44DB-B04A-BB39C5E522A5 - 3adf6c8b289c91ea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIViewController&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in SpeedNumber.GameCenter.(showLogin in _904246F5627D98B4A64F52CFE0827380)(completion: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "SpeedNumber"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ivanruizmonjo/Projects/SpeedNumber/SpeedNumber/GameCenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "315">
+               </Location>
+               <Location
+                  uuid = "A5B305C0-BC77-44DB-B04A-BB39C5E522A5 - 3adf6c8b289c91ea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIViewController&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in SpeedNumber.GameCenter.(showLogin in _904246F5627D98B4A64F52CFE0827380)(completion: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "SpeedNumber"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ivanruizmonjo/Projects/SpeedNumber/SpeedNumber/GameCenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "901">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E5D058F7-B02C-4940-BDD7-6F757205F7EE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpeedNumber/GameCenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "showLogin(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EE9BB5F1-D20D-4443-BD16-F036118EB7B6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpeedNumber/GameCenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "showLogin(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

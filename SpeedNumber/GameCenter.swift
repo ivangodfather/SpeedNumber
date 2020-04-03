@@ -11,7 +11,7 @@ import UIKit
 
 import GameKit
 
-final class GameCenter: NSObject, GKLocalPlayerListener, ObservableObject {
+final class GameCenter: NSObject, ObservableObject {
     
     var viewController: UIViewController?
     
@@ -21,24 +21,31 @@ final class GameCenter: NSObject, GKLocalPlayerListener, ObservableObject {
         return GKLocalPlayer.local.isAuthenticated
     }
     private let leaderboard = GKLeaderboard()
-
-
+    
+    
     init(leaderboardIdentifier: String) {
         self.leaderboardIdentifier = leaderboardIdentifier
         super.init()
-
-        GKLocalPlayer.local.authenticateHandler = { gcAuthVC, error in
-            if GKLocalPlayer.local.isAuthenticated {
-                GKLocalPlayer.local.register(self)
-            } else if let vc = gcAuthVC {
-                self.viewController?.present(vc, animated: true, completion: nil)
+        
+        //        showLogin()
+        leaderboard.identifier = leaderboardIdentifier
+        loadScores()
+    }
+    
+    private func showLogin(completion: (() -> ())? = nil) {
+        guard !GKLocalPlayer.local.isAuthenticated else {
+            return
+        }
+        GKLocalPlayer.local.authenticateHandler = { authVC, error in
+            if let vc = authVC  {
+                self.viewController?.present(vc, animated: true, completion: completion)
+            } else if GKLocalPlayer.local.isAuthenticated  {
+                print("woho")
             }
             else {
                 print("Error authentication to GameCenter: \(error?.localizedDescription ?? "none")")
             }
         }
-        leaderboard.identifier = leaderboardIdentifier
-        loadScores()
     }
     
     private func loadScores() {
@@ -58,6 +65,10 @@ final class GameCenter: NSObject, GKLocalPlayerListener, ObservableObject {
     }
     
     func showLeaderBoard() {
+        guard GKLocalPlayer.local.isAuthenticated else {
+            showLogin(completion: nil)
+            return
+        }
         let gc = GKGameCenterViewController()
         gc.leaderboardIdentifier = leaderboardIdentifier
         gc.gameCenterDelegate = self
@@ -67,7 +78,7 @@ final class GameCenter: NSObject, GKLocalPlayerListener, ObservableObject {
     func loadBestResult() -> Int64? {
         leaderboard.localPlayerScore?.value
     }
-        
+    
 }
 
 extension GameCenter: GKGameCenterControllerDelegate {

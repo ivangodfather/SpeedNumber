@@ -15,7 +15,7 @@ enum GameState {
 }
 
 struct ContentView: View {
-    private var gridSize = 5
+    private var gridSize = 2
     
     @State private var gridContent: [[Int]] = []
     @State private var currentValue = 1
@@ -31,12 +31,13 @@ struct ContentView: View {
                 ScoreView(
                     score: gameDuration.score,
                     maxScore: self.gameCenter.loadBestResult()?.score,
-                    completion: updateState
+                    completion: didTapNewGame
                 )
             }
             else if gameState == .running {
                 GameView(
-                    completion: updateState,
+                    completion: didTapNewGame,
+                    leaderBoard: self.gameCenter.showLeaderBoard,
                     gameDuration: $gameDuration,
                     currentValue: currentValue,
                     gridContent: gridContent,
@@ -44,20 +45,20 @@ struct ContentView: View {
                 )
             } else {
                 WelcomeScreenView(
-                    newGame: updateState,
+                    newGame: didTapNewGame,
                     leaderboard: self.gameCenter.showLeaderBoard
                 )
             }
         }
     }
     
-    private func updateState() {
+    private func didTapNewGame() {
         switch gameState {
         case .idle:
             resetGame()
             gameState = .running
         case .running:
-            gameState = currentValue < targetValue ? .idle : .finished
+            gameState = .idle
         case .finished:
             gameState = .idle
         }
@@ -79,17 +80,15 @@ struct ContentView: View {
     private func didTap(_ x: Int, _ y: Int) {
         let nextSlot = gridSize * gridSize + currentValue
         if currentValue == gridContent[x][y] {
-            withAnimation {
-                currentValue += 1
-            }
+            currentValue += 1
             gridContent[x][y] = nextSlot <= targetValue ? nextSlot : 0
-            checkGameIsEnded()
         }
+        checkGameIsEnded()
     }
     
     private func checkGameIsEnded() {
         if currentValue > targetValue {
-            updateState()
+            gameState = currentValue < targetValue ? .idle : .finished
             self.gameCenter.reportScore(gameDuration)
         }
     }

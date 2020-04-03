@@ -11,6 +11,7 @@ import SwiftUI
 struct GameView: View {
     
     var completion: () -> ()
+    let leaderBoard: () -> ()
     @Binding var gameDuration: TimeInterval
     var currentValue: Int
     var gridContent: [[Int]]
@@ -25,7 +26,6 @@ struct GameView: View {
                 currentValue: currentValue
             )
             createGrid()
-            
             MenuView(
                 newGame: completion,
                 leaderboard: self.gameCenter.showLeaderBoard
@@ -55,7 +55,8 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(completion: { },
+        GameView(completion: {},
+                 leaderBoard: {},
                  gameDuration: .constant(3),
                  currentValue: 1,
                  gridContent: [[1, 2, 3], [1, 2, 3], [1, 2, 3]],
