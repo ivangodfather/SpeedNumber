@@ -14,7 +14,7 @@ struct GameStatusView: View {
     var currentValue: Int
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack {
                 Image(systemName: "timer")
                 TimerView(gameDuration: self.$gameDuration)
@@ -23,7 +23,7 @@ struct GameStatusView: View {
                 Image(systemName: "number")
                 CurrentValueView(currentValue: currentValue)
             }
-        }.padding(.top, 64)
+        }.padding(.top, 32)
     }
 }
 

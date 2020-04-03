@@ -20,7 +20,7 @@ struct TileView: View {
                 .overlay(
                     Text(value > 0 ? value.description : "")
                         .foregroundColor(.primary)
-                        .font(Font.system(size: 23, weight: .medium, design: .monospaced))
+                        .font(Font.system(size: 48, weight: .medium, design: .monospaced))
             )
             
         }

@@ -13,7 +13,7 @@ struct CurrentValueView: View {
 
     var body: some View {
         Text(currentValue.description)
-            .font(Font.system(size: 56, design: .monospaced))
+            .font(Font.system(size: 88, design: .monospaced))
             .foregroundColor(Color.primary)
     }
 }

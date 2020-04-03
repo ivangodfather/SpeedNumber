@@ -20,12 +20,13 @@ struct GameView: View {
     private let padding: CGFloat = 4
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             GameStatusView(
                 gameDuration: $gameDuration,
                 currentValue: currentValue
             )
             createGrid()
+            Spacer()
             MenuView(
                 newGame: completion,
                 leaderboard: self.gameCenter.showLeaderBoard
@@ -46,7 +47,7 @@ struct GameView: View {
                     }
                 }
             }
-            .padding( self.padding)
+            .padding(self.padding)
             .frame(width: min(proxy.size.width, proxy.size.height),
                    height: min(proxy.size.width, proxy.size.height))
         }
@@ -59,7 +60,11 @@ struct GameView_Previews: PreviewProvider {
                  leaderBoard: {},
                  gameDuration: .constant(3),
                  currentValue: 1,
-                 gridContent: [[1, 2, 3], [1, 2, 3], [1, 2, 3]],
+                 gridContent: [[99, 2, 3, 4, 5],
+                               [1, 2, 3, 4, 5],
+                               [1, 2, 3, 4, 5],
+                               [1, 2, 3, 4, 5],
+                               [1, 2, 3, 4, 5]],
                  didTap: { _, _ in }
         ).environmentObject(GameCenter(leaderboardIdentifier: "x"))
     }

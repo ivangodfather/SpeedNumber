@@ -17,7 +17,7 @@ enum GameState {
 struct ContentView: View {
     private var gridSize : Int {
         #if DEBUG
-            return 2
+            return 5
         #else
             return 5
         #endif
