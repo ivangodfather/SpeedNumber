@@ -11,3 +11,5 @@
 "leaderboard" = "LEADERBOARD";
 "score.last" = "Your final score is";
 "score.best" = "Your best is";
+"share.content" = "I got %@ sec at Speedy Numbers!\nCatch me if you can!";
+"share.me" = "Share me!";

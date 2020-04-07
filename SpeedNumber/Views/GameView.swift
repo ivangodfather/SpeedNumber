@@ -46,14 +46,7 @@ struct GameView: View {
                     HStack(spacing: self.padding) {
                         ForEach(0...self.gridContent.first!.count - 1, id: \.self) { x in
                             TileView(x: x, y: y, value: self.gridContent[x][y]) {
-                                withAnimation(Animation.easeInOut(duration: 0.3))  {
-                                    self.scale.toggle()
-                                    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { (timer) in
-                                        withAnimation(Animation.easeInOut(duration: 0.5))  {
-                                            self.scale.toggle()
-                                        }
-                                    }
-                                }
+                                self.animate()
                                 self.didTap(x, y)
                             }
                         }
@@ -66,6 +59,17 @@ struct GameView: View {
             Spacer()
         }
 
+    }
+    
+    private func animate() {
+        withAnimation(Animation.easeInOut(duration: 0.3))  {
+            self.scale.toggle()
+            Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                withAnimation(Animation.easeInOut(duration: 0.5))  {
+                    self.scale.toggle()
+                }
+            }
+        }
     }
 }
 

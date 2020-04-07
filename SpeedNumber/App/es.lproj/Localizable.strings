@@ -6,8 +6,10 @@
   Copyright © 2020 Ivan Ruiz Monjo. All rights reserved.
 */
 
-"main.subtitle" = "Sigue la secuencia de 1 a 50 tan rápido como pueadas!";
+"main.subtitle" = "Sigue la secuencia de 1 a 50 tan rápido como puedas!";
 "play" = "JUGAR";
 "leaderboard" = "CLASIFICACIÓN";
 "score.last" = "Tu puntuación final es";
-"score.best" = "La mejor es";
+"score.best" = "Tu mejor es";
+"share.content" = "He hecho %@ seg. en Speedy Numbers!\nSupérame si puedes!";
+"share.me" = "¡Compárteme!";

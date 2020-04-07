@@ -10,6 +10,8 @@
 		421E3DBE243C87790042B63D /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421E3DBD243C87790042B63D /* SoundManager.swift */; };
 		421E3DC3243C8B330042B63D /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = 421E3DC2243C8B320042B63D /* correct.wav */; };
 		421E3DC5243C8C480042B63D /* incorrect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 421E3DC4243C8C480042B63D /* incorrect.wav */; };
+		421E3DC7243CA2950042B63D /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421E3DC6243CA2950042B63D /* ShareView.swift */; };
+		421E3DC9243CA99F0042B63D /* Locale+Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421E3DC8243CA99F0042B63D /* Locale+Country.swift */; };
 		423F8C69243C6ADD00C31F1C /* Translations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423F8C68243C6ADD00C31F1C /* Translations.swift */; };
 		423F8C6C243C6BBB00C31F1C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 423F8C6E243C6BBB00C31F1C /* Localizable.strings */; };
 		427031F6243C489E00B73B86 /* View+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427031F5243C489D00B73B86 /* View+Font.swift */; };
@@ -39,6 +41,8 @@
 		421E3DBD243C87790042B63D /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		421E3DC2243C8B320042B63D /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
 		421E3DC4243C8C480042B63D /* incorrect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incorrect.wav; sourceTree = "<group>"; };
+		421E3DC6243CA2950042B63D /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
+		421E3DC8243CA99F0042B63D /* Locale+Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+Country.swift"; sourceTree = "<group>"; };
 		423F8C61243C69FC00C31F1C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		423F8C68243C6ADD00C31F1C /* Translations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translations.swift; sourceTree = "<group>"; };
 		423F8C6D243C6BBB00C31F1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 				4272088C24371EBE0007D61A /* Bundle+Version.swift */,
 				42AAF1162437AC9200BB21E7 /* View+GridSize.swift */,
 				427031F5243C489D00B73B86 /* View+Font.swift */,
+				421E3DC8243CA99F0042B63D /* Locale+Country.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 				42B6A7CF2435B7D900B4D381 /* GameView.swift */,
 				42A1E5892434C1AB00FA53F6 /* TileView.swift */,
 				42B6A7C92435B44C00B4D381 /* ScoreView.swift */,
+				421E3DC6243CA2950042B63D /* ShareView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -253,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				421E3DC7243CA2950042B63D /* ShareView.swift in Sources */,
 				42B6A7D22435BACD00B4D381 /* GameStatusView.swift in Sources */,
 				42A1E58C2434C25E00FA53F6 /* CurrentValueView.swift in Sources */,
 				427031F6243C489E00B73B86 /* View+Font.swift in Sources */,
@@ -261,6 +268,7 @@
 				42A1E5742434932D00FA53F6 /* AppDelegate.swift in Sources */,
 				42A1E5762434932D00FA53F6 /* SceneDelegate.swift in Sources */,
 				42A1E5882434BA5100FA53F6 /* TimerView.swift in Sources */,
+				421E3DC9243CA99F0042B63D /* Locale+Country.swift in Sources */,
 				4272088D24371EBE0007D61A /* Bundle+Version.swift in Sources */,
 				42B6A7D02435B7D900B4D381 /* GameView.swift in Sources */,
 				42B6A7CE2435B73500B4D381 /* MenuView.swift in Sources */,

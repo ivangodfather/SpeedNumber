@@ -14,4 +14,6 @@ struct Translation {
     static let leaderboard = LocalizedStringKey("leaderboard")
     static let lastScore = LocalizedStringKey("score.last")
     static let bestScore = LocalizedStringKey("score.best")
+    static let shareContent = LocalizedStringKey("share.content")
+    static let shareMe = LocalizedStringKey("share.me")
 }
