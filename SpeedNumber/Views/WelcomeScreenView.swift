@@ -20,23 +20,19 @@ struct WelcomeScreenView: View {
             Text(versionText)
                 .modifier(FootNodeLabel())
             Spacer()
-            Text("Tap to start")
+            Image(uiImage: UIImage(named: "logo")!)
+                .resizable()
+                .frame(width: 150, height: 150)
+            Text("Speedy Numbers")
                 .modifier(LargeTitleLabel())
             Text("Try to follow de sequence as fast as you can!")
                 .padding(32)
                 .modifier(BodyLabel())
             Spacer()
-            Button(action: { self.leaderboard() }) {
-                HStack {
-                    Image(systemName: "gamecontroller")
-                        .imageScale(.large)
-                    Text("LEADERBOARD")
-                }
-            }
-            .modifier(DefaultButton())
-
+            MenuView(newGame: newGame, leaderboard: leaderboard)
 
         }
+        .background(Color(UIColor.systemBackground))
         .onTapGesture {
             self.newGame()
         }
@@ -45,6 +41,12 @@ struct WelcomeScreenView: View {
 
 struct WelcomeScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeScreenView(versionText: "Speedy v0.1", newGame: {}, leaderboard: {})
+        Group {
+            WelcomeScreenView(versionText: "Speedy v0.1", newGame: {}, leaderboard: {})
+            WelcomeScreenView(versionText: "Speedy v0.1", newGame: {}, leaderboard: {})
+                .environment(\.colorScheme, .dark)
+        }
+        .background(Color(UIColor.systemBackground))
+
     }
 }

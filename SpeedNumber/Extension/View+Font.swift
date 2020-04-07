@@ -34,7 +34,7 @@ struct FootNodeLabel: ViewModifier {
 struct DefaultButton: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(Font.system(.subheadline,design: dessing))
-            .foregroundColor(Color(UIColor.link))
+            .font(Font.system(.headline,design: dessing))
+            .foregroundColor(Color(.label))
     }
 }

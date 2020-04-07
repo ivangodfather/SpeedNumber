@@ -20,7 +20,7 @@ struct TileView: View {
     var body: some View {
         Button(action: { self.completion() }) {
             Rectangle()
-                .fill(Color.accentColor.opacity(value > totalGridCount ? 0.8 : 0.2))
+                .fill(computeColor())
                 .border(Color.primary, width: value == 0 ? 0: 2)
                 .overlay(
                     Text(value > 0 ? value.description : "")
@@ -30,21 +30,26 @@ struct TileView: View {
             
         }
     }
+    
+    private func computeColor() -> Color {
+        guard value != 0 else { return .clear }
+        return Color(.systemTeal).opacity(value > totalGridCount ? 1 : 0.5)
+    }
 }
 
 struct TileView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             HStack {
-                TileView(x: 1, y: 1, value: 35, completion: {})
+                TileView(x: 1, y: 1, value: 1, completion: {})
                     .environment(\.colorScheme, .dark)
                 TileView(x: 1, y: 1, value: 2, completion: {})
             }
             .environment(\.colorScheme, .light)
             HStack {
-                TileView(x: 1, y: 1, value: 35, completion: {})
+                TileView(x: 1, y: 1, value: 3, completion: {})
                     .environment(\.colorScheme, .dark)
-                TileView(x: 1, y: 1, value: 2, completion: {})
+                TileView(x: 1, y: 1, value: 4, completion: {})
             }
             .environment(\.colorScheme, .dark)
 
