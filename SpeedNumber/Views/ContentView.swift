@@ -24,7 +24,6 @@ struct ContentView: View {
     @State private var gameDuration: TimeInterval = 0.0
     private var targetValue: Int { gridSize * gridSize * 2 }
     @EnvironmentObject var gameCenter: GameCenter
-
     
     var body: some View {
         Group {

@@ -16,17 +16,20 @@ struct GameView: View {
     var currentValue: Int
     var gridContent: [[Int]]
     var didTap: (_ x: Int, _ y: Int) -> ()
+    @State private var scale: Bool = false
     @EnvironmentObject var gameCenter: GameCenter
     private let padding: CGFloat = 4
-
+    
     var body: some View {
         VStack(spacing: 0) {
+            Spacer(minLength: UIScreen.main.bounds.size.height / 25)
+
             GameStatusView(
                 gameDuration: $gameDuration,
-                currentValue: currentValue
+                currentValue: currentValue,
+                scale: $scale
             )
             createGrid()
-            Spacer()
             MenuView(
                 newGame: completion,
                 leaderboard: self.gameCenter.showLeaderBoard
@@ -36,12 +39,21 @@ struct GameView: View {
     }
     
     private func createGrid() -> some View {
+        
         GeometryReader { proxy in
             VStack(spacing: self.padding) {
                 ForEach(0...self.gridContent.count - 1, id: \.self) { y in
                     HStack(spacing: self.padding) {
                         ForEach(0...self.gridContent.first!.count - 1, id: \.self) { x in
                             TileView(x: x, y: y, value: self.gridContent[x][y]) {
+                                withAnimation(Animation.easeInOut(duration: 0.3))  {
+                                    self.scale.toggle()
+                                    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { (timer) in
+                                        withAnimation(Animation.easeInOut(duration: 0.5))  {
+                                            self.scale.toggle()
+                                        }
+                                    }
+                                }
                                 self.didTap(x, y)
                             }
                         }
@@ -51,7 +63,9 @@ struct GameView: View {
             .padding(self.padding)
             .frame(width: min(proxy.size.width, proxy.size.height),
                    height: min(proxy.size.width, proxy.size.height))
+            Spacer()
         }
+
     }
 }
 
@@ -60,7 +74,7 @@ struct GameView_Previews: PreviewProvider {
         GameView(completion: {},
                  leaderBoard: {},
                  gameDuration: .constant(3),
-                 currentValue: 1,
+                 currentValue: 2,
                  gridContent: [[99, 2, 3, 4, 5],
                                [1, 2, 3, 4, 5],
                                [1, 2, 3, 4, 5],
