@@ -88,18 +88,19 @@ struct ContentView: View {
 
 
         let nextSlot = gridSize * gridSize + currentValue
+        applyFeedback(isCorrectCell)
         if isCorrectCell {
-            applyFeedback()
             currentValue += 1
             gridContent[x][y] = nextSlot <= targetValue ? nextSlot : 0
         }
         checkGameIsEnded()
     }
     
-    private func applyFeedback() {
+    private func applyFeedback(_ isCorrect: Bool) {
         let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
         notificationFeedbackGenerator.prepare()
-        notificationFeedbackGenerator.notificationOccurred(.success)
+        notificationFeedbackGenerator.notificationOccurred(isCorrect ? .success : .error)
+        SoundManager.play(isCorrect ? .correct : .incorrect)
     }
     
     private func checkGameIsEnded() {
