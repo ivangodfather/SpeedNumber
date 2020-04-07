@@ -10,11 +10,19 @@ import SwiftUI
 
 struct CurrentValueView: View {
     var currentValue: Int
-
+    
+    @State private var hasAppeared = false
     var body: some View {
         Text(currentValue.description)
             .font(Font.system(size: 88, design: .monospaced))
             .foregroundColor(Color.primary)
+            .scaleEffect(CGFloat(currentValue))
+            .animation(.default)
+            .onAppear {
+                print("hey ya")
+        }.onDisappear {
+            print("out")
+        }
     }
 }
 
