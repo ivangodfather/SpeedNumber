@@ -17,17 +17,11 @@ struct ScoreView: View {
     var body: some View {
         VStack {
             Spacer()
-            Text("Your final score is")
-                .font(Font.system(.headline, design: .monospaced))
-            Text(score)
-                .font(Font.system(size: 64, design: .monospaced))
+            MiniScoreView(title: Translation.lastScore, score: score, size: 48)
             Spacer()
             if maxScore != nil {
-                Text("Your best score is")
-                    .font(Font.system(.headline, design: .monospaced))
-                Text(maxScore!)
-                    .font(Font.system(size: 32, design: .monospaced))
-                    .padding(.bottom, 32)
+                MiniScoreView(title: Translation.bestScore, score: maxScore!, size: 32)
+                .padding()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -41,5 +35,28 @@ struct ScoreView: View {
 struct ScoreView_Previews: PreviewProvider {
     static var previews: some View {
         ScoreView(score: "32.2", maxScore: "20.0", completion: {})
+    }
+}
+
+struct MiniScoreView: View {
+    let title: LocalizedStringKey
+    let score: String
+    let size: CGFloat
+    var body: some View {
+        VStack(spacing: 8) {
+            Text(title).font(Font.system(size: CGFloat(size / 2), design: .monospaced))
+                .minimumScaleFactor(0.5)
+                .lineLimit(1)
+                .padding([.leading, .trailing])
+            HStack(spacing: 16) {
+                Image(systemName: "timer")
+                    .resizable()
+                    .frame(width: size, height: size)
+                .foregroundColor(Color(.systemPink))
+
+                Text(score)
+                    .font(Font.system(size: size, design: .monospaced))
+            }
+        }
     }
 }

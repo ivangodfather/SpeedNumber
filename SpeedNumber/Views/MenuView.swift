@@ -18,18 +18,22 @@ struct MenuView: View {
             Button(action: { self.newGame() }) {
                 HStack {
                     Image(systemName: "play")
-                    Text("PLAY")
+                    .foregroundColor(Color(.systemPink))
+                    Text(Translation.play)
                 }
             }
             Spacer()
             Button(action: { self.leaderboard() }) {
                 HStack {
                     Image(systemName: "gamecontroller")
-                    Text("LEADERBOARD")
+                    .foregroundColor(Color(.systemPink))
+
+                    Text(Translation.leaderboard)
                 }
             }
         }
             .imageScale(.large)
+            
 
         .modifier(DefaultButton())
         .padding(24)

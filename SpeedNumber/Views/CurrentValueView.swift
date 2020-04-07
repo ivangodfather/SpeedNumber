@@ -16,13 +16,6 @@ struct CurrentValueView: View {
         Text(currentValue.description)
             .font(Font.system(size: 88, design: .monospaced))
             .foregroundColor(Color.primary)
-            .scaleEffect(CGFloat(currentValue))
-            .animation(.default)
-            .onAppear {
-                print("hey ya")
-        }.onDisappear {
-            print("out")
-        }
     }
 }
 
@@ -33,10 +26,10 @@ struct CurrentValueView_Previews: PreviewProvider {
 }
 
 extension AnyTransition {
-  static var customTransition: AnyTransition {
-    let transition = AnyTransition.move(edge: .top)
-      .combined(with: .scale(scale: 0.2, anchor: .topTrailing))
-      .combined(with: .opacity)
-    return transition
-  }
+    static var customTransition: AnyTransition {
+        let transition = AnyTransition.move(edge: .top)
+            .combined(with: .scale(scale: 0.2, anchor: .topTrailing))
+            .combined(with: .opacity)
+        return transition
+    }
 }

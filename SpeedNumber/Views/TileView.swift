@@ -21,11 +21,10 @@ struct TileView: View {
         Button(action: { self.completion() }) {
             Rectangle()
                 .fill(computeColor())
-                .border(Color.primary, width: value == 0 ? 0: 2)
                 .overlay(
                     Text(value > 0 ? value.description : "")
                         .foregroundColor(.primary)
-                        .font(Font.system(size: 48, weight: .medium, design: .monospaced))
+                        .font(Font.system(size: 48, design: .monospaced))
             )
             
         }

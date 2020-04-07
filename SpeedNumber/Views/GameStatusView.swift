@@ -17,10 +17,15 @@ struct GameStatusView: View {
         VStack(spacing: 0) {
             HStack {
                 Image(systemName: "timer")
+                    .imageScale(.large)
+                .foregroundColor(Color(.systemPink))
                 TimerView(gameDuration: self.$gameDuration)
             }
             HStack {
                 Image(systemName: "number")
+                    .imageScale(.large)
+                .foregroundColor(Color(.systemPink))
+
                 CurrentValueView(currentValue: currentValue)
             }
         }.padding(.top, 32)

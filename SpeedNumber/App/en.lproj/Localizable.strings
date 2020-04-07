@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  SpeedNumber
+
+  Created by Ivan Ruiz Monjo on 07/04/2020.
+  Copyright © 2020 Ivan Ruiz Monjo. All rights reserved.
+*/
+
+"main.subtitle" = "Try to follow the sequence from 1 to 50 as fast as you can!";
+"play" = "PLAY";
+"leaderboard" = "LEADERBOARD";
+"score.last" = "Your final score is";
+"score.best" = "Your best is";
