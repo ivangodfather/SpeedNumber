@@ -11,7 +11,7 @@ import SwiftUI
 struct TileView: View {
     var x, y, value: Int
     var completion: () -> ()
-    @Environment(\.gridSize) var gridSize
+    @Environment(\.gridSize) private var gridSize
     
     private var totalGridCount: Int {
         return gridSize * gridSize

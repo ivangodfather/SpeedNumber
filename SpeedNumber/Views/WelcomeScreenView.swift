@@ -18,16 +18,23 @@ struct WelcomeScreenView: View {
     var body: some View {
         VStack {
             Text(versionText)
-            .font(Font.system(.footnote, design: .monospaced))
+                .modifier(FootNodeLabel())
             Spacer()
             Text("Tap to start")
-                .font(Font.system(.largeTitle, design: .monospaced))
-                .padding(32)
+                .modifier(LargeTitleLabel())
             Text("Try to follow de sequence as fast as you can!")
                 .padding(32)
-                .font(Font.system(.headline, design: .monospaced))
+                .modifier(BodyLabel())
             Spacer()
-            MenuView(newGame: newGame, leaderboard: leaderboard)
+            Button(action: { self.leaderboard() }) {
+                HStack {
+                    Image(systemName: "gamecontroller")
+                        .imageScale(.large)
+                    Text("LEADERBOARD")
+                }
+            }
+            .modifier(DefaultButton())
+
 
         }
         .onTapGesture {
