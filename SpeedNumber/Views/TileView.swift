@@ -32,7 +32,7 @@ struct TileView: View {
     
     private func computeColor() -> Color {
         guard value != 0 else { return .clear }
-        return Color(.systemTeal).opacity(value > totalGridCount ? 1 : 0.5)
+        return value > totalGridCount ? Color(.systemGray3) : Color(.systemGray5)
     }
 }
 
