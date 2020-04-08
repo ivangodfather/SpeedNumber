@@ -24,6 +24,7 @@ struct ContentView: View {
     @State private var gameDuration: TimeInterval = 0.0
     private var targetValue: Int { gridSize * gridSize * 2 }
     @EnvironmentObject var gameCenter: GameCenter
+    @State var isAlertGameCenterPresented = false
     
     private let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
 
@@ -51,7 +52,12 @@ struct ContentView: View {
                     versionText: versionText(),
                     newGame: didTapNewGame,
                     leaderboard: showLeaderboard
-                )
+                ).alert(isPresented: $isAlertGameCenterPresented) {
+                    Alert(title: Text(NSLocalizedString(Translation.gameCenterErrorTitle,comment: "")),
+                          message: Text(NSLocalizedString(Translation.gameCenterErrorDescription, comment: "")),
+                          primaryButton: .default(Text(NSLocalizedString(Translation.goToSettings, comment: "")), action: { UIApplication.shared.openSettings() }),
+                        secondaryButton: .destructive(Text(NSLocalizedString(Translation.continueWithoutGameCenter, comment: ""))))
+                }
             }
         }.onAppear {
             self.notificationFeedbackGenerator.prepare()
@@ -59,8 +65,8 @@ struct ContentView: View {
     }
     
     func showLeaderboard() {
-        if !self.gameCenter.showLeaderboard() {
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.tryToEnableGameCenter()
+        if !gameCenter.showLeaderboard() {
+            self.isAlertGameCenterPresented.toggle()
         }
     }
     

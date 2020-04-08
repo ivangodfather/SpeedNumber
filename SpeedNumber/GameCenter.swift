@@ -29,18 +29,15 @@ final class GameCenter: NSObject, ObservableObject {
         leaderboard.identifier = leaderboardIdentifier
     }
     
-    func login(succeeded: @escaping (_ isLogged : Bool) -> ()) {
-        guard !GKLocalPlayer.local.isAuthenticated else {
-            return
-        }
+    func login(success: @escaping (_ isLogged : Bool) -> ()) {
         GKLocalPlayer.local.authenticateHandler = { authVC, error in
             if let vc = authVC  {
                 self.viewController?.present(vc, animated: true, completion: nil)
             } else if GKLocalPlayer.local.isAuthenticated  {
-                succeeded(true)
+                success(true)
             }
             else {
-                succeeded(false)
+                success(false)
                 print("Error authentication to GameCenter: \(error?.localizedDescription ?? "none")")
             }
         }

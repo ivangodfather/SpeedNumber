@@ -21,29 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UIHostingController(rootView: contentView)
             gameCenter.viewController = window.rootViewController
-            gameCenter.login { [weak self] isLogged in
-                if isLogged {
-                    self?.gameCenter.loadScores()
-                } else {
-                    self?.tryToEnableGameCenter()
-                }
-            }
+            gameCenter.login {  _ in }
             self.window = window
             window.makeKeyAndVisible()
         }
-    }
-    
-    func tryToEnableGameCenter() {
-        let alert = UIAlertController(title: NSLocalizedString(Translation.gameCenterErrorTitle,comment: ""),
-                                      message: NSLocalizedString(Translation.gameCenterErrorDescription, comment: ""),
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString(Translation.goToSettings, comment: ""), style: .default, handler: { alert in
-            UIApplication.shared.openSettings()
-            
-        }))
-        alert.addAction(UIAlertAction(title: NSLocalizedString(Translation.continueWithoutGameCenter, comment: ""),
-                                      style: .destructive, handler: nil))
-        window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
