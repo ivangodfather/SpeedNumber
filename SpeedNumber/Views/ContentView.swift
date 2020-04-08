@@ -25,6 +25,9 @@ struct ContentView: View {
     private var targetValue: Int { gridSize * gridSize * 2 }
     @EnvironmentObject var gameCenter: GameCenter
     
+    private let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+
+    
     var body: some View {
         Group {
             if gameState == .finished {
@@ -50,7 +53,9 @@ struct ContentView: View {
                     leaderboard: self.gameCenter.showLeaderBoard
                 )
             }
-        }.accentColor(Color.blue)
+        }.onAppear {
+            self.notificationFeedbackGenerator.prepare()
+        }
     }
     
     private func versionText() -> String {
@@ -97,10 +102,10 @@ struct ContentView: View {
     }
     
     private func applyFeedback(_ isCorrect: Bool) {
-        let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
-        notificationFeedbackGenerator.prepare()
-        notificationFeedbackGenerator.notificationOccurred(isCorrect ? .success : .error)
-        SoundManager.play(isCorrect ? .correct : .incorrect)
+
+        if !isCorrect {
+            notificationFeedbackGenerator.notificationOccurred( .error)
+        }
     }
     
     private func checkGameIsEnded() {
