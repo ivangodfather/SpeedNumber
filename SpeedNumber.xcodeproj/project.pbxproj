@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		420CA1C5243DC22B00587298 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420CA1C4243DC22B00587298 /* UIApplication+.swift */; };
 		421E3DC7243CA2950042B63D /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421E3DC6243CA2950042B63D /* ShareView.swift */; };
 		421E3DC9243CA99F0042B63D /* Locale+Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421E3DC8243CA99F0042B63D /* Locale+Country.swift */; };
 		423F8C69243C6ADD00C31F1C /* Translations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423F8C68243C6ADD00C31F1C /* Translations.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		420CA1C4243DC22B00587298 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		421E3DC6243CA2950042B63D /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		421E3DC8243CA99F0042B63D /* Locale+Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+Country.swift"; sourceTree = "<group>"; };
 		423F8C61243C69FC00C31F1C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				42AAF1162437AC9200BB21E7 /* View+GridSize.swift */,
 				427031F5243C489D00B73B86 /* View+Font.swift */,
 				421E3DC8243CA99F0042B63D /* Locale+Country.swift */,
+				420CA1C4243DC22B00587298 /* UIApplication+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			files = (
 				421E3DC7243CA2950042B63D /* ShareView.swift in Sources */,
 				42B6A7D22435BACD00B4D381 /* GameStatusView.swift in Sources */,
+				420CA1C5243DC22B00587298 /* UIApplication+.swift in Sources */,
 				42A1E58C2434C25E00FA53F6 /* CurrentValueView.swift in Sources */,
 				427031F6243C489E00B73B86 /* View+Font.swift in Sources */,
 				42F982042435D53100E643E6 /* Int+Score.swift in Sources */,

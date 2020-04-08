@@ -16,4 +16,8 @@ struct Translation {
     static let bestScore = LocalizedStringKey("score.best")
     static let shareContent = LocalizedStringKey("share.content")
     static let shareMe = LocalizedStringKey("share.me")
+    static let gameCenterErrorDescription = "game.center.error.description"
+    static let gameCenterErrorTitle = "game.center.error.title"
+    static let goToSettings = "go.to.settings"
+    static let continueWithoutGameCenter = "game.center.continue.without"
 }

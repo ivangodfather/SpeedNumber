@@ -13,3 +13,7 @@
 "score.best" = "Your best is";
 "share.content" = "I got %@ sec at Speedy Numbers!\nCatch me if you can!";
 "share.me" = "Share me!";
+"game.center.error.title" = "Game Center Error";
+"game.center.error.description" = "You have Game Center disabled. Go to Settings / GameCenter to participate in the leaderboard.";
+"go.to.settings" = "Go to Settings";
+"game.center.continue.without" = "Disable leaderboard";

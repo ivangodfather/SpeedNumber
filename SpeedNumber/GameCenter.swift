@@ -26,29 +26,27 @@ final class GameCenter: NSObject, ObservableObject {
     init(leaderboardIdentifier: String) {
         self.leaderboardIdentifier = leaderboardIdentifier
         super.init()
-        
-        showLogin()
         leaderboard.identifier = leaderboardIdentifier
-        loadScores()
     }
     
-    private func showLogin(completion: (() -> ())? = nil) {
+    func login(succeeded: @escaping (_ isLogged : Bool) -> ()) {
         guard !GKLocalPlayer.local.isAuthenticated else {
             return
         }
         GKLocalPlayer.local.authenticateHandler = { authVC, error in
             if let vc = authVC  {
-                self.viewController?.present(vc, animated: true, completion: completion)
+                self.viewController?.present(vc, animated: true, completion: nil)
             } else if GKLocalPlayer.local.isAuthenticated  {
-                print("woho")
+                succeeded(true)
             }
             else {
+                succeeded(false)
                 print("Error authentication to GameCenter: \(error?.localizedDescription ?? "none")")
             }
         }
     }
     
-    private func loadScores() {
+    func loadScores() {
         leaderboard.loadScores { _, _ in
         }
     }
@@ -64,15 +62,15 @@ final class GameCenter: NSObject, ObservableObject {
         }
     }
     
-    func showLeaderBoard() {
+    func showLeaderBoard() -> Bool {
         guard GKLocalPlayer.local.isAuthenticated else {
-            showLogin(completion: nil)
-            return
+            return false
         }
         let gc = GKGameCenterViewController()
         gc.leaderboardIdentifier = leaderboardIdentifier
         gc.gameCenterDelegate = self
         viewController?.present(gc, animated: true, completion: nil)
+        return true
     }
     
     func loadBestResult() -> Int64? {
@@ -83,6 +81,6 @@ final class GameCenter: NSObject, ObservableObject {
 
 extension GameCenter: GKGameCenterControllerDelegate {
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-        gameCenterViewController.dismiss(animated: true, completion: nil)
+        gameCenterViewController.dismiss(animated: false, completion: nil)
     }
 }

@@ -13,7 +13,7 @@ struct WelcomeScreenView: View {
     
     let versionText: String
     let newGame: () -> ()
-    let leaderboard: () -> ()
+    let leaderboard: () -> Bool
     
     var body: some View {
         VStack {
@@ -43,8 +43,8 @@ struct WelcomeScreenView: View {
 struct WelcomeScreenView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            WelcomeScreenView(versionText: "Speedy v0.1", newGame: {}, leaderboard: {})
-            WelcomeScreenView(versionText: "Speedy v0.1", newGame: {}, leaderboard: {})
+            WelcomeScreenView(versionText: "Speedy v0.1", newGame: {}, leaderboard: { true })
+            WelcomeScreenView(versionText: "Speedy v0.1", newGame: {}, leaderboard: { true })
                 .environment(\.colorScheme, .dark)
         }
         .background(Color(UIColor.systemBackground))

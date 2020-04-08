@@ -13,3 +13,7 @@
 "score.best" = "Tu mejor es";
 "share.content" = "He hecho %@ seg. en Speedy Numbers!\nSupérame si puedes!";
 "share.me" = "¡Compárteme!";
+"game.center.error.title" = "Game Center Error";
+"game.center.error.description" = "Tienes desactivado Game Center.\nDirígete a Ajustes / Game Center para poder participar en la clasificación.";
+"go.to.settings" = "Ir a a Ajustes";
+"game.center.continue.without" = "Deshabilitar clasificación";
