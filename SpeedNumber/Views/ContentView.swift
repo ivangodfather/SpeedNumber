@@ -40,7 +40,7 @@ struct ContentView: View {
             else if gameState == .running {
                 GameView(
                     completion: didTapNewGame,
-                    leaderBoard: self.gameCenter.showLeaderBoard,
+                    leaderboard: showLeaderboard,
                     gameDuration: $gameDuration,
                     currentValue: currentValue,
                     gridContent: gridContent,
@@ -50,11 +50,17 @@ struct ContentView: View {
                 WelcomeScreenView(
                     versionText: versionText(),
                     newGame: didTapNewGame,
-                    leaderboard: self.gameCenter.showLeaderBoard
+                    leaderboard: showLeaderboard
                 )
             }
         }.onAppear {
             self.notificationFeedbackGenerator.prepare()
+        }
+    }
+    
+    func showLeaderboard() {
+        if !self.gameCenter.showLeaderboard() {
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.tryToEnableGameCenter()
         }
     }
     

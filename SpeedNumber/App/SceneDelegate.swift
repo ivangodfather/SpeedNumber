@@ -33,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
-    private func tryToEnableGameCenter() {
+    func tryToEnableGameCenter() {
         let alert = UIAlertController(title: NSLocalizedString(Translation.gameCenterErrorTitle,comment: ""),
                                       message: NSLocalizedString(Translation.gameCenterErrorDescription, comment: ""),
                                       preferredStyle: .alert)

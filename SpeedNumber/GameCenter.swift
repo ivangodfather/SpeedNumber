@@ -62,7 +62,7 @@ final class GameCenter: NSObject, ObservableObject {
         }
     }
     
-    func showLeaderBoard() -> Bool {
+    func showLeaderboard() -> Bool {
         guard GKLocalPlayer.local.isAuthenticated else {
             return false
         }

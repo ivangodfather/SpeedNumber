@@ -10,8 +10,7 @@ import SwiftUI
 
 struct GameView: View {
     
-    var completion: () -> ()
-    let leaderBoard: () -> Bool
+    var completion, leaderboard: () -> ()
     @Binding var gameDuration: TimeInterval
     var currentValue: Int
     var gridContent: [[Int]]
@@ -23,7 +22,6 @@ struct GameView: View {
     var body: some View {
         VStack(spacing: 0) {
             Spacer(minLength: UIScreen.main.bounds.size.height / 25)
-
             GameStatusView(
                 gameDuration: $gameDuration,
                 currentValue: currentValue,
@@ -32,7 +30,7 @@ struct GameView: View {
             createGrid()
             MenuView(
                 newGame: completion,
-                leaderboard: self.gameCenter.showLeaderBoard
+                leaderboard: leaderboard
             )
         }
         .background(Color(UIColor.systemBackground))
@@ -76,7 +74,7 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView(completion: {},
-                 leaderBoard: { true },
+                 leaderboard: {},
                  gameDuration: .constant(3),
                  currentValue: 2,
                  gridContent: [[99, 2, 3, 4, 5],
@@ -86,7 +84,6 @@ struct GameView_Previews: PreviewProvider {
                                [1, 2, 3, 4, 5]],
                  didTap: { _, _ in }
         )
-            .environmentObject(GameCenter(leaderboardIdentifier: "x"))
             .colorScheme(.dark)
     }
 }

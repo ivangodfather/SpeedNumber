@@ -11,8 +11,7 @@ import SwiftUI
 
 struct MenuView: View {
     
-    let newGame: () -> ()
-    let leaderboard: () -> Bool
+    let newGame, leaderboard: () -> ()
     
     var body: some View {
         HStack {
@@ -24,9 +23,7 @@ struct MenuView: View {
                 }
             }
             Spacer()
-            Button(action: { if !self.leaderboard() {
-                // TODO
-            }}) {
+            Button(action: { self.leaderboard() }) {
                 HStack {
                     Image(systemName: "gamecontroller")
                     .foregroundColor(Color(.systemPink))
@@ -45,6 +42,6 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView(newGame: {}, leaderboard: { true })
+        MenuView(newGame: {}, leaderboard: {})
     }
 }
