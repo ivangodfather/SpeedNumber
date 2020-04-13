@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UIHostingController(rootView: contentView)
             gameCenter.viewController = window.rootViewController
-            gameCenter.login {  _ in }
+            gameCenter.login {  _ in self.gameCenter.loadScores() }
             self.window = window
             window.makeKeyAndVisible()
         }

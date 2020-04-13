@@ -25,7 +25,7 @@ extension EnvironmentValues {
 struct GridSizeKey: EnvironmentKey {
     static var defaultValue: Int {
         #if DEBUG
-            return 5
+            return 2
         #else
             return 5
         #endif
