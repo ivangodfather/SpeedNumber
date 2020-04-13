@@ -54,9 +54,8 @@ struct GameView: View {
             .padding(self.padding)
             .frame(width: min(proxy.size.width, proxy.size.height),
                    height: min(proxy.size.width, proxy.size.height))
-            Spacer()
         }
-
+        
     }
     
     private func animate() {
@@ -73,17 +72,33 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(completion: {},
-                 leaderboard: {},
-                 gameDuration: .constant(3),
-                 currentValue: 2,
-                 gridContent: [[99, 2, 3, 4, 5],
-                               [1, 2, 3, 4, 5],
-                               [1, 2, 3, 4, 5],
-                               [1, 2, 3, 4, 5],
-                               [1, 2, 3, 4, 5]],
-                 didTap: { _, _ in }
-        )
-            .colorScheme(.dark)
+        Group {
+            ForEach(["iPhone SE", "iPhone XS Max", "iPad Pro (12.9-inch) (3rd generation)"], id: \.self) { deviceName in
+                GameView(completion: {},
+                         leaderboard: {},
+                         gameDuration: .constant(3),
+                         currentValue: 2,
+                         gridContent: [[99, 2, 3, 4, 5],
+                                       [1, 2, 3, 4, 5],
+                                       [1, 2, 3, 4, 5],
+                                       [1, 2, 3, 4, 5],
+                                       [1, 2, 3, 4, 5]],
+                         didTap: { _, _ in }
+                ).previewDevice(PreviewDevice(rawValue: deviceName))
+                    .previewDisplayName(deviceName)
+            }
+            GameView(completion: {},
+                     leaderboard: {},
+                     gameDuration: .constant(3),
+                     currentValue: 2,
+                     gridContent: [[99, 2, 3, 4, 5],
+                                   [1, 2, 3, 4, 5],
+                                   [1, 2, 3, 4, 5],
+                                   [1, 2, 3, 4, 5],
+                                   [1, 2, 3, 4, 5]],
+                     didTap: { _, _ in }
+            ).previewLayout(.fixed(width: 1200, height: 900))
+        }
+        
     }
 }
