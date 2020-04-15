@@ -65,7 +65,7 @@ struct ContentView: View {
     }
     
     func showLeaderboard() {
-        if !gameCenter.showLeaderboard() {
+        gameCenter.showLeaderboard { hasShown in
             self.isAlertGameCenterPresented.toggle()
         }
     }

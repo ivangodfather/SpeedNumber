@@ -59,15 +59,33 @@ final class GameCenter: NSObject, ObservableObject {
         }
     }
     
-    func showLeaderboard() -> Bool {
+    func showLeaderboard(hasShown: @escaping (Bool) -> ()) {
+        var hasPresented = false
+        
         guard GKLocalPlayer.local.isAuthenticated else {
-            return false
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                if hasPresented == false {
+                    hasShown (false)
+                    return
+                }
+            }
+            login { success in
+                hasPresented = true
+                if success {
+                    self.presentLeaderBoard()
+                }
+            }
+            return
         }
+        hasShown(true)
+        presentLeaderBoard()
+    }
+    
+    private func presentLeaderBoard() {
         let gc = GKGameCenterViewController()
         gc.leaderboardIdentifier = leaderboardIdentifier
         gc.gameCenterDelegate = self
         viewController?.present(gc, animated: true, completion: nil)
-        return true
     }
     
     func loadBestResult() -> Int64? {
