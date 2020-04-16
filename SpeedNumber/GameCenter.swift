@@ -43,9 +43,34 @@ final class GameCenter: NSObject, ObservableObject {
         }
     }
     
-    func loadScores() {
-        leaderboard.loadScores { _, _ in
+    func loadScores(completion: (([GKScore]) -> ())? = nil) {
+        leaderboard.playerScope = .global
+        leaderboard.timeScope = .allTime
+        leaderboard.range = NSRange(location: 1, length: 3)
+        leaderboard.loadScores { scores, error in
+            if let scores = scores {
+                completion?(scores)
+            }
         }
+    }
+    
+    func loadScoresWithImages(completion: @escaping ([(GKScore, UIImage?)]) -> () ) {
+        let group = DispatchGroup()
+        var output = [(GKScore, UIImage?)]()
+        loadScores { scores in
+            scores.forEach { score in
+                group.enter()
+                score.player.loadPhoto(for: .normal) { image, error in
+                    output.append((score, image))
+                    group.leave()
+                }
+            }
+        }
+        group.notify(queue: .main) {
+            completion(output)
+        }
+        
+        
     }
     
     func reportScore(_ score: Double) {

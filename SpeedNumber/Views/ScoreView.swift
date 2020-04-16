@@ -16,29 +16,33 @@ struct ScoreView: View {
     @State private var isSharePresented: Bool = false
 
     var body: some View {
-        VStack {
-            Spacer()
-            MiniScoreView(title: Translation.lastScore, score: score, size: 48)
-            Button(action: { self.isSharePresented.toggle() }) {
-                HStack {
-                    Image(systemName: "square.and.arrow.up")
-                    .foregroundColor(Color(.systemPink))
-                    Text(Translation.shareMe).modifier(BodyLabel())
-                }.padding()
+        GeometryReader { proxy in
+            VStack {
+                Spacer()
+                MiniScoreView(title: Translation.lastScore, score: self.score, size: 48)
+                Button(action: { self.isSharePresented.toggle() }) {
+                    HStack {
+                        Image(systemName: "square.and.arrow.up")
+                        .foregroundColor(Color(.systemPink))
+                        Text(Translation.shareMe).modifier(BodyLabel())
+                    }.padding()
+                }
+                PodiumView(names: ["T", "P"])
+                    .padding()
+                    .frame(width: proxy.size.width, height: proxy.size.height / 4)
+                Spacer()
+                if self.maxScore != nil {
+                    MiniScoreView(title: Translation.bestScore, score: self.maxScore!, size: 32)
+                    .padding()
+                }
             }
-
-            Spacer()
-            if maxScore != nil {
-                MiniScoreView(title: Translation.bestScore, score: maxScore!, size: 32)
-                .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(UIColor.systemBackground))
+            .onTapGesture {
+                self.completion()
+            }.sheet(isPresented: self.$isSharePresented, onDismiss: {}) {
+                ActivityViewController(activityItems: self.items())
             }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(UIColor.systemBackground))
-        .onTapGesture {
-            self.completion()
-        }.sheet(isPresented: $isSharePresented, onDismiss: {}) {
-            ActivityViewController(activityItems: self.items())
         }
     }
     
@@ -78,6 +82,7 @@ struct MiniScoreView: View {
 
                 Text(score)
                     .font(Font.system(size: size, design: .monospaced))
+                    .minimumScaleFactor(0.5)
             }
         }
     }
