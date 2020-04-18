@@ -15,11 +15,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private let gameCenter = GameCenter(leaderboardIdentifier: "speedynumbers")
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        let contentView = ContentView()
+        let gameView = GameView()
             .environmentObject(gameCenter)
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
+            window.rootViewController = UIHostingController(rootView: gameView)
             gameCenter.viewController = window.rootViewController
             gameCenter.login {  _ in self.gameCenter.loadScores(completion: nil) }
             self.window = window
