@@ -11,7 +11,7 @@ import SwiftUI
 
 struct PodiumView: View {
     
-    var names: [String]
+    var images: [UIImage]
     
     var body: some View {
         GeometryReader { proxy in
@@ -28,13 +28,14 @@ struct PodiumView: View {
                     path.addLine(to: CGPoint(x: 0, y: proxy.size.height * 0.55))
                 }
                 HStack {
-                    Text("2")
+                    self.positionWithImage(position: "2", image: self.images[0])
                         .padding(.leading, proxy.size.width * 0.10)
                     Spacer()
-                    Text("1")
+                    self.positionWithImage(position: "2", image: self.images[0])
+
                     Spacer()
-                    Text("3")
-                        .padding(.trailing, proxy.size.width * 0.10)
+                    self.positionWithImage(position: "2", image: self.images[0])
+                    .padding(.trailing, proxy.size.width * 0.10)
                 }
                 .padding(.bottom, proxy.size.height / 24)
                 .foregroundColor(.white)
@@ -45,10 +46,19 @@ struct PodiumView: View {
         }
     }
     
+    func positionWithImage(position: String, image: UIImage) -> some View {
+        return VStack(spacing: 24) {
+            Image(uiImage: image)
+            Text(position)
+        }
+    }
+    
 }
+
+
 
 struct PodiumView_Preview: PreviewProvider {
     static var previews: some View {
-        return PodiumView(names: ["IR", "NO", "SI"]).previewLayout(.fixed(width: 300, height: 100))
+        return PodiumView(images: [UIImage(systemName: "pencil.circle")!, UIImage(systemName: "pencil.circle.fill")!, UIImage(systemName: "pencil.circle")!]).previewLayout(.fixed(width: 300, height: 100))
     }
 }

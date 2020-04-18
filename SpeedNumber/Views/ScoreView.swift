@@ -14,7 +14,7 @@ struct ScoreView: View {
     let completion: () -> ()
     
     @State private var isSharePresented: Bool = false
-
+    
     var body: some View {
         GeometryReader { proxy in
             VStack {
@@ -23,17 +23,14 @@ struct ScoreView: View {
                 Button(action: { self.isSharePresented.toggle() }) {
                     HStack {
                         Image(systemName: "square.and.arrow.up")
-                        .foregroundColor(Color(.systemPink))
+                            .foregroundColor(Color(.systemPink))
                         Text(Translation.shareMe).modifier(BodyLabel())
                     }.padding()
                 }
-                PodiumView(names: ["T", "P"])
-                    .padding()
-                    .frame(width: proxy.size.width, height: proxy.size.height / 4)
                 Spacer()
                 if self.maxScore != nil {
                     MiniScoreView(title: Translation.bestScore, score: self.maxScore!, size: 32)
-                    .padding()
+                        .padding()
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -54,13 +51,13 @@ struct ScoreView: View {
         
     }
 }
-
+import GameKit
 struct ScoreView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(["es", "en"], id: \.self) { id in
             ScoreView(score: "32.2", maxScore: "20.0", completion: {})
-                 .environment(\.locale, .init(identifier: id))
-         }
+                .environment(\.locale, .init(identifier: id))
+        }
     }
 }
 
@@ -78,8 +75,8 @@ struct MiniScoreView: View {
                 Image(systemName: "timer")
                     .resizable()
                     .frame(width: size, height: size)
-                .foregroundColor(Color(.systemPink))
-
+                    .foregroundColor(Color(.systemPink))
+                
                 Text(score)
                     .font(Font.system(size: size, design: .monospaced))
                     .minimumScaleFactor(0.5)

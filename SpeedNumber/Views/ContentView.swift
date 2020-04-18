@@ -27,7 +27,6 @@ struct ContentView: View {
     @State var isAlertGameCenterPresented = false
     
     private let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
-
     
     var body: some View {
         Group {
