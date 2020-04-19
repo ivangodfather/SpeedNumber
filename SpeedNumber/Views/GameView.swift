@@ -34,14 +34,11 @@ struct GameView: View {
                 )
             } else {
                 WelcomeScreenView(
-                    versionText: versionText(),
+                    versionText: viewModel.versionText,
                     newGame: viewModel.didTapNewGame,
                     leaderboard: showLeaderboard
                 ).alert(isPresented: $isAlertGameCenterPresented) {
-                    Alert(title: Text(NSLocalizedString(Translation.gameCenterErrorTitle,comment: "")),
-                          message: Text(NSLocalizedString(Translation.gameCenterErrorDescription, comment: "")),
-                          primaryButton: .default(Text(NSLocalizedString(Translation.goToSettings, comment: "")), action: { UIApplication.shared.openSettings() }),
-                        secondaryButton: .destructive(Text(NSLocalizedString(Translation.continueWithoutGameCenter, comment: ""))))
+                    gameCenterAlert()
                 }
             }
         }.onAppear {
@@ -55,11 +52,13 @@ struct GameView: View {
         }
     }
     
-    private func versionText() -> String {
-        return "SpeedyNumbers v.\(Bundle.main.releaseVersion) build \(Bundle.main.buildVersion)\nCopyright © 2020 Iván Ruiz Monjo"
+    private func gameCenterAlert() -> Alert {
+        Alert(title: Text(Translation.gameCenterErrorTitle),
+              message: Text(Translation.gameCenterErrorDescription),
+              primaryButton: .default(Text(Translation.goToSettings), action: { UIApplication.shared.openSettings() }),
+              secondaryButton: .destructive(Text(Translation.continueWithoutGameCenter)))
     }
     
-
 }
 
 struct GameView_Previews: PreviewProvider {

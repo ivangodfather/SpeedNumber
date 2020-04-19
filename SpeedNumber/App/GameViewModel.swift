@@ -78,4 +78,8 @@ final class GameViewModel: ObservableObject {
             notificationFeedbackGenerator.notificationOccurred( .error)
         }
     }
+    
+    var versionText: String {
+        "SpeedyNumbers v.\(Bundle.main.releaseVersion) build \(Bundle.main.buildVersion)\nCopyright © 2020 Iván Ruiz Monjo"
+    }
 }
