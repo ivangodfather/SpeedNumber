@@ -16,16 +16,16 @@ enum GameState {
 }
 
 final class GameViewModel: ObservableObject {
-    
+
     @Published var gameState = GameState.idle
     @Published var gridContent: [[Int]] = []
     @Published var currentValue = 1
     @Published var gameDuration: TimeInterval = 0.0
     @Environment(\.gridSize) var gridSize
-    
+
     private var targetValue: Int { gridSize * gridSize * 2 }
     let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
-    
+
     func didTapNewGame() {
         switch gameState {
         case .idle:
@@ -37,10 +37,9 @@ final class GameViewModel: ObservableObject {
             gameState = .idle
         }
     }
-    
+
     func didTapCell(_ x: Int, _ y: Int) {
         let isCorrectCell = currentValue == gridContent[x][y]
-
 
         let nextSlot = gridSize * gridSize + currentValue
         applyFeedback(isCorrectCell)
@@ -50,7 +49,7 @@ final class GameViewModel: ObservableObject {
         }
         checkGameIsEnded()
     }
-    
+
     private func resetGame() {
         gameDuration = 0
         currentValue = 1
@@ -63,7 +62,7 @@ final class GameViewModel: ObservableObject {
         }
         gridContent = content
     }
-    
+
     private func checkGameIsEnded() {
         if currentValue > targetValue {
             gameState = currentValue < targetValue ? .idle : .finished
@@ -72,14 +71,17 @@ final class GameViewModel: ObservableObject {
             #endif
         }
     }
-    
+
     private func applyFeedback(_ isCorrect: Bool) {
         if !isCorrect {
             notificationFeedbackGenerator.notificationOccurred( .error)
         }
     }
-    
+
     var versionText: String {
-        "SpeedyNumbers v.\(Bundle.main.releaseVersion) build \(Bundle.main.buildVersion)\nCopyright © 2020 Iván Ruiz Monjo"
+        """
+        SpeedyNumbers v.\(Bundle.main.releaseVersion) build \(Bundle.main.buildVersion)
+        Copyright © 2020 Iván Ruiz Monjo
+        """
     }
 }

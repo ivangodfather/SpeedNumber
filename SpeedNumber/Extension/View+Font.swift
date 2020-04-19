@@ -15,26 +15,26 @@ private var dessing: Font.Design {
 
 struct LargeTitleLabel: ViewModifier {
     func body(content: Content) -> some View {
-        content.font(Font.system(.largeTitle,design: dessing))
+        content.font(Font.system(.largeTitle, design: dessing))
     }
 }
 
 struct BodyLabel: ViewModifier {
     func body(content: Content) -> some View {
-        content.font(Font.system(.body,design: dessing))
+        content.font(Font.system(.body, design: dessing))
     }
 }
 
 struct FootNodeLabel: ViewModifier {
     func body(content: Content) -> some View {
-        content.font(Font.system(.footnote,design: dessing))
+        content.font(Font.system(.footnote, design: dessing))
     }
 }
 
 struct DefaultButton: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(Font.system(.headline,design: dessing))
+            .font(Font.system(.headline, design: dessing))
             .foregroundColor(Color(.label))
     }
 }

@@ -9,16 +9,16 @@
 import SwiftUI
 
 struct BoardView: View {
-    
-    var completion, leaderboard: () -> ()
+
+    var completion, leaderboard: () -> Void
     @Binding var gameDuration: TimeInterval
     var currentValue: Int
     var gridContent: [[Int]]
-    var didTapCell: (_ x: Int, _ y: Int) -> ()
+    var didTapCell: (_ x: Int, _ y: Int) -> Void
     @State private var scale: Bool = false
     @EnvironmentObject var gameCenter: GameCenter
     private let padding: CGFloat = 4
-    
+
     var body: some View {
         VStack(spacing: 0) {
             Spacer(minLength: UIScreen.main.bounds.size.height / 25)
@@ -35,9 +35,9 @@ struct BoardView: View {
         }
         .background(Color(UIColor.systemBackground))
     }
-    
+
     private func createGrid() -> some View {
-        
+
         GeometryReader { proxy in
             VStack(spacing: self.padding) {
                 ForEach(0...self.gridContent.count - 1, id: \.self) { y in
@@ -55,14 +55,14 @@ struct BoardView: View {
             .frame(width: min(proxy.size.width, proxy.size.height),
                    height: min(proxy.size.width, proxy.size.height))
         }
-        
+
     }
-    
+
     private func animate() {
-        withAnimation(Animation.easeInOut(duration: 0.3))  {
+        withAnimation(Animation.easeInOut(duration: 0.3)) {
             self.scale.toggle()
             Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
-                withAnimation(Animation.easeInOut(duration: 0.5))  {
+                withAnimation(Animation.easeInOut(duration: 0.5)) {
                     self.scale.toggle()
                 }
             }
@@ -99,6 +99,6 @@ struct BoardView_Previews: PreviewProvider {
                      didTapCell: { _, _ in }
             ).previewLayout(.fixed(width: 1200, height: 900))
         }
-        
+
     }
 }

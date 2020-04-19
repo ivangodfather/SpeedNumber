@@ -10,17 +10,17 @@ import SwiftUI
 import Combine
 
 struct TimerView: View {
-    
+
     @Binding var gameDuration: TimeInterval
     private let timer  = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
-    
+
     var body: some View {
         VStack {
             Text(gameDuration.score)
                 .font(Font.system(.largeTitle, design: .monospaced))
                 .foregroundColor(Color.primary)
         }
-        .onReceive(timer) { output in
+        .onReceive(timer) { _ in
             self.gameDuration += 0.01
         }
         .onDisappear {

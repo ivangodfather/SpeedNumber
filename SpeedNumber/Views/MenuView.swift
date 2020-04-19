@@ -10,9 +10,9 @@ import Foundation
 import SwiftUI
 
 struct MenuView: View {
-    
-    let newGame, leaderboard: () -> ()
-    
+
+    let newGame, leaderboard: () -> Void
+
     var body: some View {
         HStack {
             Button(action: { self.newGame() }) {
@@ -33,7 +33,6 @@ struct MenuView: View {
             }
         }
             .imageScale(.large)
-            
 
         .modifier(DefaultButton())
         .padding(24)

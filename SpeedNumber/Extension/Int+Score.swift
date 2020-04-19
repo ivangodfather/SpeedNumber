@@ -10,6 +10,6 @@ import Foundation
 
 extension Int64 {
     var score: String {
-        String(Double(self) / 100) 
+        String(Double(self) / 100)
     }
 }

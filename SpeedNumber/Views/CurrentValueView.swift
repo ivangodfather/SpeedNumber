@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CurrentValueView: View {
     var currentValue: Int
-    
+
     @State private var hasAppeared = false
     var body: some View {
         Text(currentValue.description)

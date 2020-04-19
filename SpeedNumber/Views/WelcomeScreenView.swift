@@ -10,10 +10,10 @@ import Foundation
 import SwiftUI
 
 struct WelcomeScreenView: View {
-    
+
     let versionText: String
-    let newGame, leaderboard: () -> ()
-    
+    let newGame, leaderboard: () -> Void
+
     var body: some View {
         VStack {
             Text(versionText)

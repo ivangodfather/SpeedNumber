@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct GameStatusView: View {
-    
+
     @Binding var gameDuration: TimeInterval
     var currentValue: Int
     @Binding var scale: Bool

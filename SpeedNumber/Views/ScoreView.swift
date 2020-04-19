@@ -11,12 +11,12 @@ import SwiftUI
 struct ScoreView: View {
     let score: String
     let maxScore: String?
-    let completion: () -> ()
-    
+    let completion: () -> Void
+
     @State private var isSharePresented: Bool = false
-    
+
     var body: some View {
-        GeometryReader { proxy in
+        GeometryReader { _ in
             VStack {
                 Spacer()
                 MiniScoreView(title: Translation.lastScore, score: self.score, size: 48)
@@ -42,13 +42,13 @@ struct ScoreView: View {
             }
         }
     }
-    
-    private func items() -> [Any]{
+
+    private func items() -> [Any] {
         [
             String(format: NSLocalizedString("share.content", comment: ""), score),
             URL(string: "https://apps.apple.com/\(Locale.current.isSpain ? "es": "us")/app/speedynumbers/id1505831179?ls=1")!
         ]
-        
+
     }
 }
 import GameKit
@@ -76,7 +76,7 @@ struct MiniScoreView: View {
                     .resizable()
                     .frame(width: size, height: size)
                     .foregroundColor(Color(.systemPink))
-                
+
                 Text(score)
                     .font(Font.system(size: size, design: .monospaced))
                     .minimumScaleFactor(0.5)

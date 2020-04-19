@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct GameView: View {
-    
+
     @EnvironmentObject var gameCenter: GameCenter
     @State var isAlertGameCenterPresented = false
     @ObservedObject private var viewModel = GameViewModel()
-    
+
     var body: some View {
         Group {
             if viewModel.gameState == .finished {
@@ -22,8 +22,7 @@ struct GameView: View {
                     maxScore: self.gameCenter.loadBestResult()?.score,
                     completion: viewModel.didTapNewGame
                 )
-            }
-            else if viewModel.gameState == .running {
+            } else if viewModel.gameState == .running {
                 BoardView(
                     completion: viewModel.didTapNewGame,
                     leaderboard: showLeaderboard,
@@ -45,20 +44,20 @@ struct GameView: View {
             self.viewModel.notificationFeedbackGenerator.prepare()
         }
     }
-    
+
     func showLeaderboard() {
-        gameCenter.showLeaderboard { hasShown in
+        gameCenter.showLeaderboard { _ in
             self.isAlertGameCenterPresented.toggle()
         }
     }
-    
+
     private func gameCenterAlert() -> Alert {
         Alert(title: Text(Translation.gameCenterErrorTitle),
               message: Text(Translation.gameCenterErrorDescription),
               primaryButton: .default(Text(Translation.goToSettings), action: { UIApplication.shared.openSettings() }),
               secondaryButton: .destructive(Text(Translation.continueWithoutGameCenter)))
     }
-    
+
 }
 
 struct GameView_Previews: PreviewProvider {

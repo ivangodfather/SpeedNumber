@@ -10,13 +10,13 @@ import SwiftUI
 
 struct TileView: View {
     var x, y, value: Int
-    var completion: () -> ()
+    var completion: () -> Void
     @Environment(\.gridSize) private var gridSize
-    
+
     private var totalGridCount: Int {
         return gridSize * gridSize
     }
-    
+
     var body: some View {
         Button(action: { self.completion() }) {
             Rectangle()
@@ -26,10 +26,10 @@ struct TileView: View {
                         .foregroundColor(.primary)
                         .font(Font.system(size: 48, design: .monospaced))
             )
-            
+
         }
     }
-    
+
     private func computeColor() -> Color {
         guard value != 0 else { return .clear }
         return value > totalGridCount ? Color(.systemGray3) : Color(.systemGray5)

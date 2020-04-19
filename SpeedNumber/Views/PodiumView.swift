@@ -10,12 +10,12 @@ import Foundation
 import SwiftUI
 
 struct PodiumView: View {
-    
+
     var images: [UIImage]
-    
+
     var body: some View {
         GeometryReader { proxy in
-            
+
             ZStack(alignment: .bottom) {
                 Path { path in
                     path.move(to: CGPoint(x: 0, y: proxy.size.height))
@@ -40,22 +40,20 @@ struct PodiumView: View {
                 .padding(.bottom, proxy.size.height / 24)
                 .foregroundColor(.white)
                 .font(Font.system(size: proxy.size.width / 10, weight: .heavy, design: .monospaced))
-                
+
             }
 
         }
     }
-    
+
     func positionWithImage(position: String, image: UIImage) -> some View {
         return VStack(spacing: 24) {
             Image(uiImage: image)
             Text(position)
         }
     }
-    
+
 }
-
-
 
 struct PodiumView_Preview: PreviewProvider {
     static var previews: some View {
