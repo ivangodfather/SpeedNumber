@@ -20,7 +20,7 @@ struct GameView: View {
             case .finished:
                 ScoreView(
                     score: viewModel.gameDuration.score,
-                    maxScore: self.gameCenter.loadBestResult()?.score,
+                    maxScoreHandler: self.gameCenter.loadBestResult,
                     completion: viewModel.didTapNewGame
                 )
             case .running:

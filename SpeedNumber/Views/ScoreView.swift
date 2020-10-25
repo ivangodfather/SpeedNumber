@@ -10,8 +10,9 @@ import SwiftUI
 
 struct ScoreView: View {
     let score: String
-    let maxScore: String?
+    let maxScoreHandler: (@escaping ((Int?) -> Void)) -> ()
     let completion: () -> Void
+    @State private var maxScore: Int? = nil
 
     @State private var isSharePresented: Bool = false
 
@@ -28,8 +29,8 @@ struct ScoreView: View {
                     }.padding()
                 }
                 Spacer()
-                if self.maxScore != nil {
-                    MiniScoreView(title: Translation.bestScore, score: self.maxScore!, size: 32)
+                if let maxScore = maxScore {
+                    MiniScoreView(title: Translation.bestScore, score: maxScore.description, size: 32)
                         .padding()
                 }
             }
@@ -39,6 +40,12 @@ struct ScoreView: View {
                 self.completion()
             }.sheet(isPresented: self.$isSharePresented, onDismiss: {}) {
                 ActivityViewController(activityItems: self.items())
+            }
+        }.onAppear {
+            maxScoreHandler { value in
+                if let value = value {
+                    maxScore = value
+                }
             }
         }
     }
@@ -55,7 +62,7 @@ import GameKit
 struct ScoreView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(["es", "en"], id: \.self) { id in
-            ScoreView(score: "32.2", maxScore: "20.0", completion: {})
+            ScoreView(score: "32.2", maxScoreHandler: { _ in }, completion: {})
                 .environment(\.locale, .init(identifier: id))
         }
     }

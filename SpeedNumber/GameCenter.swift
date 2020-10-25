@@ -19,12 +19,10 @@ final class GameCenter: NSObject, ObservableObject {
     private static var isAuthenticated: Bool {
         return GKLocalPlayer.local.isAuthenticated
     }
-    private let leaderboard = GKLeaderboard()
 
     init(leaderboardIdentifier: String) {
         self.leaderboardIdentifier = leaderboardIdentifier
         super.init()
-        leaderboard.identifier = leaderboardIdentifier
     }
 
     func login(success: @escaping (_ isLogged: Bool) -> Void) {
@@ -40,23 +38,24 @@ final class GameCenter: NSObject, ObservableObject {
         }
     }
 
-    func loadScores(completion: (([GKScore]) -> Void)? = nil) {
-        leaderboard.playerScope = .global
-        leaderboard.timeScope = .allTime
-        leaderboard.loadScores { scores, _ in
-            if let scores = scores {
-                completion?(scores)
+    func loadScores(completion: (([GKLeaderboard.Entry]) -> Void)? = nil) {
+        GKLeaderboard.loadLeaderboards(IDs: [leaderboardIdentifier]) { (leaderboards, error) in
+            if let leaderboard = leaderboards?.filter ({ $0.baseLeaderboardID == self.leaderboardIdentifier }).first {
+                leaderboard.loadEntries(for: .global, timeScope: .allTime, range: NSRange(1...100)) { (local, allPlayers, totalPlayers, error) in
+                    if let allPlayers = allPlayers {
+                        completion?(allPlayers)
+                    }
+                }
             }
         }
     }
 
     func reportScore(_ score: Double) {
-        let gkScore = GKScore(leaderboardIdentifier: leaderboardIdentifier)
-        gkScore.value = Int64(score * 100)
-        gkScore.context = 0
-        GKScore.report([gkScore]) { error in
-            if let error = error {
-                print(error.localizedDescription)
+        GKLeaderboard.loadLeaderboards(IDs: [leaderboardIdentifier]) { leaderboards, error in
+            if let leaderboard = leaderboards?.filter ({ $0.baseLeaderboardID == self.leaderboardIdentifier }).first {
+                leaderboard.submitScore(Int(score * 100), context: 0, player: GKLocalPlayer(), completionHandler: { error in
+                    print(error?.localizedDescription ?? "")
+                })
             }
         }
     }
@@ -84,14 +83,19 @@ final class GameCenter: NSObject, ObservableObject {
     }
 
     private func presentLeaderBoard() {
-        let gc = GKGameCenterViewController()
-        gc.leaderboardIdentifier = leaderboardIdentifier
+        let gc = GKGameCenterViewController(leaderboardID: leaderboardIdentifier, playerScope: .global, timeScope: .allTime)
         gc.gameCenterDelegate = self
         viewController?.present(gc, animated: true, completion: nil)
     }
 
-    func loadBestResult() -> Int64? {
-        leaderboard.localPlayerScore?.value
+    func loadBestResult(completion: @escaping ((Int?) -> Void)) {
+        GKLeaderboard.loadLeaderboards(IDs: [leaderboardIdentifier]) { leaderboards, error in
+            if let leaderboard = leaderboards?.filter ({ $0.baseLeaderboardID == self.leaderboardIdentifier }).first {
+                leaderboard.loadEntries(for: .global, timeScope: .allTime, range: NSRange(1...100)) { entry, _, _, error  in
+                    completion(entry?.score)
+                }
+            }
+        }
     }
 
 }
