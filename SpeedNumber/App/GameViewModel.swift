@@ -18,7 +18,7 @@ enum GameState {
 final class GameViewModel: ObservableObject {
 
     @Published var gameState = GameState.idle
-    @Published var gridContent: [[Int]] = []
+    @Published var gridContent: [Int] = []
     @Published var currentValue = 1
     @Published var gameDuration: TimeInterval = 0.0
     @Environment(\.gridSize) var gridSize
@@ -36,14 +36,14 @@ final class GameViewModel: ObservableObject {
         }
     }
 
-    func didTapCell(_ x: Int, _ y: Int) {
-        let isCorrectCell = currentValue == gridContent[x][y]
+    func didTapCell(index: Int) {
+        let isCorrectCell = currentValue == gridContent[index]
 
         let nextSlot = gridSize * gridSize + currentValue
         applyFeedback(isCorrectCell)
         if isCorrectCell {
             currentValue += 1
-            gridContent[x][y] = nextSlot <= targetValue ? nextSlot : 0
+            gridContent[index] = nextSlot <= targetValue ? nextSlot : 0
         }
         checkGameIsEnded()
     }
@@ -51,12 +51,10 @@ final class GameViewModel: ObservableObject {
     private func resetGame() {
         gameDuration = 0
         currentValue = 1
-        var content = Array(repeating: Array(repeating: 0, count: gridSize), count: gridSize)
+        var content = Array(repeating: 0, count: gridSize * gridSize)
         var contents = Array(1...gridSize * gridSize).shuffled()
-        for x in 0...gridSize - 1 {
-            for y in 0...gridSize - 1 {
-                content[x][y] = contents.popLast() ?? 0
-            }
+        for index in 0...(gridSize * gridSize) - 1 {
+                content[index] = contents.popLast() ?? 0
         }
         gridContent = content
     }

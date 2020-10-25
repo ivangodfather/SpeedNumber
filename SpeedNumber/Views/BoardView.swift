@@ -13,21 +13,23 @@ struct BoardView: View {
     var completion, leaderboard: () -> Void
     @Binding var gameDuration: TimeInterval
     var currentValue: Int
-    var gridContent: [[Int]]
-    var didTapCell: (_ x: Int, _ y: Int) -> Void
+    var gridContent: [Int]
+    var didTapCell: (Int) -> Void
     @State private var scale: Bool = false
     @EnvironmentObject var gameCenter: GameCenter
     private let padding: CGFloat = 4
+    @Environment(\.gridSize) var gridSize
 
     var body: some View {
         VStack(spacing: 0) {
-            Spacer(minLength: UIScreen.main.bounds.size.height / 25)
+            Spacer()
             GameStatusView(
                 gameDuration: $gameDuration,
                 currentValue: currentValue,
                 scale: $scale
             )
             createGrid()
+            Spacer()
             MenuView(
                 newGame: completion,
                 leaderboard: leaderboard
@@ -36,26 +38,23 @@ struct BoardView: View {
         .background(Color(UIColor.systemBackground))
     }
 
-    private func createGrid() -> some View {
-
-        GeometryReader { proxy in
-            VStack(spacing: self.padding) {
-                ForEach(0...self.gridContent.count - 1, id: \.self) { y in
-                    HStack(spacing: self.padding) {
-                        ForEach(0...self.gridContent.first!.count - 1, id: \.self) { x in
-                            TileView(x: x, y: y, value: self.gridContent[x][y]) {
-                                self.animate()
-                                self.didTapCell(x, y)
-                            }
-                        }
-                    }
-                }
-            }
-            .padding(self.padding)
-            .frame(width: min(proxy.size.width, proxy.size.height),
-                   height: min(proxy.size.width, proxy.size.height))
+    var columns: [GridItem] {
+        var cols: [GridItem] = []
+        for _ in 1...gridSize {
+            cols.append(GridItem(.flexible()))
         }
-
+        return cols
+    }
+    
+    private func createGrid() -> some View {
+        LazyVGrid(columns: columns) {
+            ForEach(Array(gridContent.enumerated()), id:\.0) { index, element in
+                TileView(index: index, value: element) {
+                    self.animate()
+                    self.didTapCell(index)
+                }.aspectRatio(contentMode: .fill)
+            }
+        }
     }
 
     private func animate() {
@@ -78,26 +77,15 @@ struct BoardView_Previews: PreviewProvider {
                          leaderboard: {},
                          gameDuration: .constant(3),
                          currentValue: 2,
-                         gridContent: [[99, 2, 3, 4, 5],
-                                       [1, 2, 3, 4, 5],
-                                       [1, 2, 3, 4, 5],
-                                       [1, 2, 3, 4, 5],
-                                       [1, 2, 3, 4, 5]],
-                         didTapCell: { _, _ in }
+                         gridContent: [99, 2, 3, 4, 5,
+                                       1, 2, 3, 4, 5,
+                                       1, 2, 3, 4, 5,
+                                       1, 2, 3, 4, 5,
+                                       1, 2, 3, 4, 5],
+                         didTapCell: { _ in }
                 ).previewDevice(PreviewDevice(rawValue: deviceName))
                     .previewDisplayName(deviceName)
             }
-            BoardView(completion: {},
-                     leaderboard: {},
-                     gameDuration: .constant(3),
-                     currentValue: 2,
-                     gridContent: [[99, 2, 3, 4, 5],
-                                   [1, 2, 3, 4, 5],
-                                   [1, 2, 3, 4, 5],
-                                   [1, 2, 3, 4, 5],
-                                   [1, 2, 3, 4, 5]],
-                     didTapCell: { _, _ in }
-            ).previewLayout(.fixed(width: 1200, height: 900))
         }
 
     }

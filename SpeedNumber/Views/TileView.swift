@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct TileView: View {
-    var x, y, value: Int
+    var index, value: Int
     var completion: () -> Void
     @Environment(\.gridSize) private var gridSize
 
@@ -40,15 +40,15 @@ struct TileView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             HStack {
-                TileView(x: 1, y: 1, value: 1, completion: {})
+                TileView(index: 1, value: 1, completion: {})
                     .environment(\.colorScheme, .dark)
-                TileView(x: 1, y: 1, value: 2, completion: {})
+                TileView(index: 1, value: 2, completion: {})
             }
             .environment(\.colorScheme, .light)
             HStack {
-                TileView(x: 1, y: 1, value: 3, completion: {})
+                TileView(index: 1, value: 3, completion: {})
                     .environment(\.colorScheme, .dark)
-                TileView(x: 1, y: 1, value: 4, completion: {})
+                TileView(index: 1, value: 4, completion: {})
             }
             .environment(\.colorScheme, .dark)
 
