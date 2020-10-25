@@ -31,9 +31,7 @@ final class GameViewModel: ObservableObject {
         case .idle:
             resetGame()
             gameState = .running
-        case .running:
-            gameState = .idle
-        case .finished:
+        case .running, .finished:
             gameState = .idle
         }
     }

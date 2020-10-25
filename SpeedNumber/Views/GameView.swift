@@ -12,17 +12,18 @@ struct GameView: View {
 
     @EnvironmentObject var gameCenter: GameCenter
     @State var isAlertGameCenterPresented = false
-    @ObservedObject private var viewModel = GameViewModel()
+    @StateObject private var viewModel = GameViewModel()
 
     var body: some View {
         Group {
-            if viewModel.gameState == .finished {
+            switch viewModel.gameState {
+            case .finished:
                 ScoreView(
                     score: viewModel.gameDuration.score,
                     maxScore: self.gameCenter.loadBestResult()?.score,
                     completion: viewModel.didTapNewGame
                 )
-            } else if viewModel.gameState == .running {
+            case .running:
                 BoardView(
                     completion: viewModel.didTapNewGame,
                     leaderboard: showLeaderboard,
@@ -31,7 +32,7 @@ struct GameView: View {
                     gridContent: viewModel.gridContent,
                     didTapCell: viewModel.didTapCell
                 )
-            } else {
+            case .idle:
                 WelcomeScreenView(
                     versionText: viewModel.versionText,
                     newGame: viewModel.didTapNewGame,
@@ -45,7 +46,7 @@ struct GameView: View {
         }
     }
 
-    func showLeaderboard() {
+    private func showLeaderboard() {
         gameCenter.showLeaderboard { _ in
             self.isAlertGameCenterPresented.toggle()
         }
