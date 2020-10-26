@@ -11,7 +11,6 @@ import SwiftUI
 struct GameView: View {
 
     @EnvironmentObject var gameCenter: GameCenter
-    @State var isAlertGameCenterPresented = false
     @StateObject private var viewModel = GameViewModel()
 
     var body: some View {
@@ -26,7 +25,7 @@ struct GameView: View {
             case .running:
                 BoardView(
                     completion: viewModel.didTapNewGame,
-                    leaderboard: showLeaderboard,
+                    leaderboard: self.gameCenter.showLeaderboard,
                     gameDuration: $viewModel.gameDuration,
                     currentValue: viewModel.currentValue,
                     gridContent: viewModel.gridContent,
@@ -36,27 +35,13 @@ struct GameView: View {
                 WelcomeScreenView(
                     versionText: viewModel.versionText,
                     newGame: viewModel.didTapNewGame,
-                    leaderboard: showLeaderboard
-                ).alert(isPresented: $isAlertGameCenterPresented) {
-                    gameCenterAlert()
-                }
+                    leaderboard: self.gameCenter.showLeaderboard
+                )
             }
         }.onAppear {
             self.viewModel.notificationFeedbackGenerator.prepare()
+            self.viewModel.gameCenter = gameCenter
         }
-    }
-
-    private func showLeaderboard() {
-        gameCenter.showLeaderboard { _ in
-            self.isAlertGameCenterPresented.toggle()
-        }
-    }
-
-    private func gameCenterAlert() -> Alert {
-        Alert(title: Text(Translation.gameCenterErrorTitle),
-              message: Text(Translation.gameCenterErrorDescription),
-              primaryButton: .default(Text(Translation.goToSettings), action: { UIApplication.shared.openSettings() }),
-              secondaryButton: .destructive(Text(Translation.continueWithoutGameCenter)))
     }
 
 }

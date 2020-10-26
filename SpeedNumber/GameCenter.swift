@@ -28,7 +28,7 @@ final class GameCenter: NSObject, ObservableObject {
     func login(success: @escaping (_ isLogged: Bool) -> Void) {
         GKLocalPlayer.local.authenticateHandler = { authVC, error in
             if let vc = authVC {
-                self.viewController?.present(vc, animated: true, completion: nil)
+                self.viewController!.present(vc, animated: true, completion: nil)
             } else if GKLocalPlayer.local.isAuthenticated {
                 success(true)
             } else {
@@ -60,29 +60,7 @@ final class GameCenter: NSObject, ObservableObject {
         }
     }
 
-    func showLeaderboard(hasShown: @escaping (Bool) -> Void) {
-        var hasPresented = false
-
-        guard GKLocalPlayer.local.isAuthenticated else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-                if hasPresented == false {
-                    hasShown(false)
-                    return
-                }
-            }
-            login { success in
-                hasPresented = true
-                if success {
-                    self.presentLeaderBoard()
-                }
-            }
-            return
-        }
-        hasShown(true)
-        presentLeaderBoard()
-    }
-
-    private func presentLeaderBoard() {
+    func showLeaderboard() {
         let gc = GKGameCenterViewController(leaderboardID: leaderboardIdentifier, playerScope: .global, timeScope: .allTime)
         gc.gameCenterDelegate = self
         viewController?.present(gc, animated: true, completion: nil)

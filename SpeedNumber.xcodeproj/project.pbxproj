@@ -16,7 +16,6 @@
 		427031F6243C489E00B73B86 /* View+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427031F5243C489D00B73B86 /* View+Font.swift */; };
 		4272088D24371EBE0007D61A /* Bundle+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4272088C24371EBE0007D61A /* Bundle+Version.swift */; };
 		42838F49243515E5006978BF /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42838F48243515E5006978BF /* GameKit.framework */; };
-		42A1E5742434932D00FA53F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A1E5732434932D00FA53F6 /* AppDelegate.swift */; };
 		42A1E5762434932D00FA53F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A1E5752434932D00FA53F6 /* SceneDelegate.swift */; };
 		42A1E5782434932D00FA53F6 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A1E5772434932D00FA53F6 /* GameView.swift */; };
 		42A1E57A2434932F00FA53F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A1E5792434932F00FA53F6 /* Assets.xcassets */; };
@@ -50,7 +49,6 @@
 		4272088C24371EBE0007D61A /* Bundle+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Version.swift"; sourceTree = "<group>"; };
 		42838F48243515E5006978BF /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		42A1E5702434932D00FA53F6 /* SpeedyNumbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeedyNumbers.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		42A1E5732434932D00FA53F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42A1E5752434932D00FA53F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		42A1E5772434932D00FA53F6 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		42A1E5792434932F00FA53F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -175,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				421E3DBF243C88EB0042B63D /* Assets */,
-				42A1E5732434932D00FA53F6 /* AppDelegate.swift */,
 				42A1E5752434932D00FA53F6 /* SceneDelegate.swift */,
 				423F8C6E243C6BBB00C31F1C /* Localizable.strings */,
 				423F8C68243C6ADD00C31F1C /* Translations.swift */,
@@ -264,7 +261,6 @@
 				427031F6243C489E00B73B86 /* View+Font.swift in Sources */,
 				42F982042435D53100E643E6 /* Int+Score.swift in Sources */,
 				42B6A7CA2435B44C00B4D381 /* ScoreView.swift in Sources */,
-				42A1E5742434932D00FA53F6 /* AppDelegate.swift in Sources */,
 				42A1E5762434932D00FA53F6 /* SceneDelegate.swift in Sources */,
 				42CDABA8244AEA2C008D97DC /* GameViewModel.swift in Sources */,
 				42A1E5882434BA5100FA53F6 /* TimerView.swift in Sources */,

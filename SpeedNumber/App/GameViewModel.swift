@@ -22,6 +22,7 @@ final class GameViewModel: ObservableObject {
     @Published var currentValue = 1
     @Published var gameDuration: TimeInterval = 0.0
     @Environment(\.gridSize) var gridSize
+    var gameCenter: GameCenter?
 
     private var targetValue: Int { gridSize * gridSize * 2 }
     let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
@@ -63,7 +64,7 @@ final class GameViewModel: ObservableObject {
         if currentValue > targetValue {
             gameState = currentValue < targetValue ? .idle : .finished
             #if RELEASE
-            self.gameCenter.reportScore(gameDuration)
+            gameCenter?.reportScore(gameDuration)
             #endif
         }
     }
