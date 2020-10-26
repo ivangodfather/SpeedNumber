@@ -33,6 +33,7 @@ struct ScoreView: View {
                     MiniScoreView(title: Translation.bestScore, score: maxScore.description, size: 32)
                         .padding()
                 }
+                PodiumView()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(UIColor.systemBackground))

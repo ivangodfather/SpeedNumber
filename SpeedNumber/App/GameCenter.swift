@@ -38,12 +38,23 @@ final class GameCenter: NSObject, ObservableObject {
         }
     }
 
-    func loadScores(completion: (([GKLeaderboard.Entry]) -> Void)? = nil) {
+    func loadScores(completion: (([(name: String, photo: UIImage?)]) -> Void)? = nil) {
         GKLeaderboard.loadLeaderboards(IDs: [leaderboardIdentifier]) { (leaderboards, error) in
             if let leaderboard = leaderboards?.filter ({ $0.baseLeaderboardID == self.leaderboardIdentifier }).first {
-                leaderboard.loadEntries(for: .global, timeScope: .allTime, range: NSRange(1...100)) { (local, allPlayers, totalPlayers, error) in
+                leaderboard.loadEntries(for: .global, timeScope: .allTime, range: NSRange(1...3)) { (_, allPlayers, _, error) in
                     if let allPlayers = allPlayers {
-                        completion?(allPlayers)
+                        let group = DispatchGroup()
+                        var players: [(String, UIImage?)] = []
+                        allPlayers.forEach { leaderboardEntry in
+                            group.enter()
+                            leaderboardEntry.player.loadPhoto(for: .normal) { image, error in
+                                players.append((leaderboardEntry.player.displayName, image))
+                                group.leave()
+                            }
+                        }
+                        group.notify(queue: DispatchQueue.main) {
+                            completion?(players)
+                        }
                     }
                 }
             }

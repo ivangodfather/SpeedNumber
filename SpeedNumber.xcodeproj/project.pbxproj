@@ -121,7 +121,6 @@
 				42F982082435D9F200E643E6 /* App */,
 				42F982072435D9E000E643E6 /* Views */,
 				42F982022435D52500E643E6 /* Extension */,
-				42E71C4F24350E3C007DEB2B /* GameCenter.swift */,
 				42A1E57E2434932F00FA53F6 /* LaunchScreen.storyboard */,
 				42A1E5812434932F00FA53F6 /* Info.plist */,
 				42A1E57B2434932F00FA53F6 /* Preview Content */,
@@ -177,6 +176,7 @@
 				423F8C6E243C6BBB00C31F1C /* Localizable.strings */,
 				423F8C68243C6ADD00C31F1C /* Translations.swift */,
 				42CDABA7244AEA2C008D97DC /* GameViewModel.swift */,
+				42E71C4F24350E3C007DEB2B /* GameCenter.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
